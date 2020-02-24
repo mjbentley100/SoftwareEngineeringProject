@@ -5,9 +5,9 @@ The files in this folder are as follows:
 		Requirements: 
 			+ Python 3.8.1
 			+ MySQL Workbench 8.0 CE 
-			+ MySQL 8.0
+			+ MySQL Server 8.0
 			+ Setup DB in MySQL Workbench: 
-				> schema name: "test_schema", username: "test_user", and password: "test12"
+				> schema name: "test_schema", username: "test_user", and password: "test123"
 				> run test.sql to create table 
 
 		To run code using python environment: 
