@@ -51,7 +51,7 @@ def train_using_gini(X_train, X_test, y_train):
 	return clf_gini
 
 # Function to perform training using Entropy
-def tarin_using_entropy(X_train, X_test, y_train):
+def train_using_entropy(X_train, X_test, y_train):
 	# Construct decision tree with entropy
 	clf_entropy = DecisionTreeClassifier(
 			criterion = "entropy", random_state = 100,
@@ -91,7 +91,7 @@ def main():
 	X, Y, X_train, X_test, y_train, y_test = splitdataset(data)
 
 	clf_gini = train_using_gini(X_train, X_test, y_train)
-	clf_entropy = tarin_using_entropy(X_train, X_test, y_train)
+	clf_entropy = train_using_entropy(X_train, X_test, y_train)
 
 	#Perform tests using Gini Index and Entropy
 	print("Results Using Gini Index:")
