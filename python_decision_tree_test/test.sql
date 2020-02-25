@@ -1,0 +1,1 @@
+SELECT * FROM test_schema.test_table;
