@@ -6,13 +6,22 @@ import java.awt.image.BufferStrategy;
 public class Main extends Canvas implements Runnable{
 
 
-    public static state ProjState = state.MENU;
+    public static state ProjState = state.PLAY;
     private boolean running = false;
     public Handler handler;
+
+
+    //Variables
     private int width;
     private int height;
+
+    //Program windows
     private Menu menu;
+    private FaceWindow face;
+
+    //Main Thread
     private Thread thread;
+
 
 
     public enum state {
@@ -29,6 +38,8 @@ public class Main extends Canvas implements Runnable{
 
         if (ProjState == state.MENU) {
             menu = new Menu(this, handler);
+        } else if (ProjState == state.PLAY) {
+            this.face = new FaceWindow(this, handler);
         }
 
     }
@@ -101,11 +112,13 @@ public class Main extends Canvas implements Runnable{
 
         Graphics g = bs.getDrawGraphics();
 
-        g.setColor(new Color(54, 183, 104));
+        g.setColor(new Color(173, 176, 183));
         g.fillRect(0,0,width, height);
 
         if (ProjState == state.MENU) {
             menu.render(g);
+        } else if (ProjState == state.PLAY) {
+            face.render(g);
         }
 
 
