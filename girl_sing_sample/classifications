@@ -1,0 +1,2 @@
+This will be where classifications of the audio samples will be stored.
+Each line will hold the class of sound being made for that line number-5 (e.g., line 5 will have the classification for sample0, etc.)
