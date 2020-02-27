@@ -14,6 +14,7 @@ public class Main extends Canvas implements Runnable{
     //Variables
     private int width;
     private int height;
+    private int numtick;
 
     //Program windows
     public Menu menu;
@@ -94,12 +95,12 @@ public class Main extends Canvas implements Runnable{
     }
 
     private void tick() {
-
+        this.numtick++;
         handler.tick();
 
         if (ProjState == state.MENU) {
 
-        } else {
+        } else if (numtick % 10 == 1){
             face.tick();
         }
 
