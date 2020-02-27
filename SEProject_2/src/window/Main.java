@@ -6,7 +6,7 @@ import java.awt.image.BufferStrategy;
 public class Main extends Canvas implements Runnable{
 
 
-    public static state ProjState = state.PLAY;
+    public static state ProjState = state.MENU;
     private boolean running = false;
     public Handler handler;
 
@@ -16,8 +16,8 @@ public class Main extends Canvas implements Runnable{
     private int height;
 
     //Program windows
-    private Menu menu;
-    private FaceWindow face;
+    public Menu menu;
+    public FaceWindow face;
 
     //Main Thread
     private Thread thread;
@@ -38,7 +38,9 @@ public class Main extends Canvas implements Runnable{
 
         if (ProjState == state.MENU) {
             menu = new Menu(this, handler);
-        } else if (ProjState == state.PLAY) {
+            this.addMouseListener(menu);
+
+        } else if (ProjState == state.PLAY) { //For testing purposes only (will never execute normally)
             this.face = new FaceWindow(this, handler);
         }
 
@@ -98,7 +100,7 @@ public class Main extends Canvas implements Runnable{
         if (ProjState == state.MENU) {
 
         } else {
-
+            face.tick();
         }
 
     }
@@ -124,6 +126,14 @@ public class Main extends Canvas implements Runnable{
 
         g.dispose();
         bs.show();
+    }
+
+
+    public void initFace() {
+        face = new FaceWindow(this, handler);
+        Main.ProjState = Main.state.PLAY;
+        removeMouseListener(menu);
+        addMouseListener(face);
     }
 
 
