@@ -7,7 +7,7 @@ import numpy as np
 
 # Function to perform MFCC analysis on audio file
 def preformMFCC():
-	rate, data = wav.read('hmm.wav')
+	rate, data = wav.read('../girl_sing_sample/0-49/sample_000.wav')
 	mfcc_feature = mfcc(data, rate, 0.025, 0.01, 20, nfft=1200, appendEnergy=True)
 	mfcc_feature = preprocessing.scale(mfcc_feature)
 	#delta = calculate_delta(mfcc_feature)
