@@ -38,9 +38,11 @@ public class Menu extends MouseAdapter {
         g.fillRect(20, 120, 100, 50);
         g.fillRect(20, 180, 100, 50);
         g.setColor(new Color(0, 0, 0));
+        g.setFont(new Font("Serif", Font.BOLD, 48));
+        g.drawString("Face Guy 3000", 100, 50);
         g.setFont(new Font("Serif", Font.BOLD, 24));
-        g.drawString("Play", 30, 150);
-        g.drawString("Quit", 30, 210);
+        g.drawString("Play", 45, 150);
+        g.drawString("Quit", 45, 210);
     }
 
     private boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
