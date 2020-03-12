@@ -43,9 +43,15 @@ def importData(el, mfccs):
 	cursor = db_connection.cursor()
 	#sql_stmt = "INSERT INTO `test_schema`.`test_table`(`sound`) VALUES(`%d`);"
 	#values = 1;
-	sql_stmt = "INSERT INTO test_table(`sound`, `mfcc 1`, `mfcc 2`, `mfcc 3`, `mfcc 4`, `mfcc 5`, `mfcc 6`, `mfcc 7`, `mfcc 8`, `mfcc 9`, `mfcc 10`, `mfcc 11`, `mfcc 12`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
-	values = (int(el), float(mfccs[0]), float(mfccs[1]), float(mfccs[2]), float(mfccs[3]), float(mfccs[4]), float(mfccs[5]),
-	float(mfccs[6]), float(mfccs[7]), float(mfccs[8]), float(mfccs[9]), float(mfccs[10]), float(mfccs[11]))
+	if (len(mfccs) == 12):
+		sql_stmt = "INSERT INTO test_table(`sound`, `mfcc 1`, `mfcc 2`, `mfcc 3`, `mfcc 4`, `mfcc 5`, `mfcc 6`, `mfcc 7`, `mfcc 8`, `mfcc 9`, `mfcc 10`, `mfcc 11`, `mfcc 12`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
+		values = (int(el), '{:0.4f}'.format(mfccs[0] *  (10**17)), '{:0.4f}'.format(mfccs[1] *  (10**17)), '{:0.4f}'.format(mfccs[2] *  (10**17)), '{:0.4f}'.format(mfccs[3] *  (10**17)), '{:0.4f}'.format(mfccs[4] *  (10**17)), '{:0.4f}'.format(mfccs[5] *  (10**17)),
+		'{:0.4f}'.format(mfccs[6] *  (10**17)), '{:0.4f}'.format(mfccs[7] *  (10**17)), '{:0.4f}'.format(mfccs[8] *  (10**17)), '{:0.4f}'.format(mfccs[9] *  (10**17)), '{:0.4f}'.format(mfccs[10] *  (10**17)), '{:0.4f}'.format(mfccs[11] *  (10**17)))
+	if (len(mfccs) > 12):
+		sql_stmt = "INSERT INTO test_table(`sound`, `mfcc 1`, `mfcc 2`, `mfcc 3`, `mfcc 4`, `mfcc 5`, `mfcc 6`, `mfcc 7`, `mfcc 8`, `mfcc 9`, `mfcc 10`, `mfcc 11`, `mfcc 12`, `mfcc 13`, `mfcc 14`, `mfcc 15`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
+		values = (int(el), '{:0.4f}'.format(mfccs[0] *  (10**17)), '{:0.4f}'.format(mfccs[1] *  (10**17)), '{:0.4f}'.format(mfccs[2] *  (10**17)), '{:0.4f}'.format(mfccs[3] *  (10**17)), '{:0.4f}'.format(mfccs[4] *  (10**17)), '{:0.4f}'.format(mfccs[5] *  (10**17)),
+		'{:0.4f}'.format(mfccs[6] *  (10**17)), '{:0.4f}'.format(mfccs[7] *  (10**17)), '{:0.4f}'.format(mfccs[8] *  (10**17)), '{:0.4f}'.format(mfccs[9] *  (10**17)), '{:0.4f}'.format(mfccs[10] *  (10**17)), '{:0.4f}'.format(mfccs[11] *  (10**17)), '{:0.4f}'.format(mfccs[12] *  (10**17)), '{:0.4f}'.format(mfccs[13] *  (10**17)), '{:0.4f}'.format(mfccs[14] *  (10**17)))
+	#if (len(mfccs) == 17):
 	cursor.execute(sql_stmt, values)
 	#cursor.execute("INSERT INTO test_schema.test_table(`sound`, `mfcc 1`) VALUES (%s, %s);" % (int(1), float(mfccs[0])))
 	db_connection.commit()
@@ -57,7 +63,7 @@ def main():
 	folder_no = 0
 	arr = getClassifierArray('classifications.txt')
 	for el in arr:
-		if (el != "-"):
+		if (el != "-" and el != '0'):
 			mffcs = performMFCC("../girl_sing_sample/%s-%s/sample_%s.mp3" % (folder_no, folder_no + 49, str(count).zfill(3)))
 			#print(len(mffcs))
 			try:

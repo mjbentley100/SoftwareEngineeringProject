@@ -32,14 +32,15 @@ def importdata():
 # Function to split the dataset into train/test data using cross-validation
 def splitdataset(balance_data):
 	# Separate the target variable from features
-	X = balance_data.values[:, 1:12] # Features
+	X = balance_data.values[:, 2:14] # Features
 	Y = balance_data.values[:, 0] # Target variable
 
 	# Split the dataset into train/test
-	X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.7, random_state = 100)
+	X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.2, random_state = 100)
 
 	# Decision tree generator test
-	#clf = tree.DecisionTreeClassifier()
+	#clf = tree.DecisionTreeClassifier(criterion = "gini",
+	#		random_state = 100, max_depth = 6, min_samples_leaf = 2, max_features="log2", min_impurity_decrease=0.5)
 	#clf = clf.fit(X, Y)
 	#tree.export_graphviz(clf, out_file='test.dot') # create graph of decision tree
 
@@ -49,19 +50,18 @@ def splitdataset(balance_data):
 def train_using_gini(X_train, X_test, y_train):
 	# Create the classifier object
 	clf_gini = DecisionTreeClassifier(criterion = "gini",
-			random_state = 100, max_depth = 8, min_samples_leaf = 11)
+			random_state = 100, max_depth = 6, min_samples_leaf = 3, max_features="auto")
 
 	# Perform training
 	clf_gini.fit(X_train, y_train)
-	tree.export_graphviz(clf_gini, out_file='test.dot') # create graph of decision tree
+	#tree.export_graphviz(clf_gini, out_file='test.dot') # create graph of decision tree
 	return clf_gini
 
 # Function to perform training using Entropy
 def train_using_entropy(X_train, X_test, y_train):
 	# Construct decision tree with entropy
-	clf_entropy = DecisionTreeClassifier(
-			criterion = "entropy", random_state = 100,
-			max_depth = 8, min_samples_leaf = 11)
+	clf_entropy = DecisionTreeClassifier(criterion = "entropy",
+					random_state = 100, max_depth = None, min_samples_leaf = 2, max_features="auto")
 
 	# Perform training
 	clf_entropy.fit(X_train, y_train)
@@ -87,7 +87,7 @@ def cal_accuracy(y_test, y_pred):
 	accuracy_score(y_test,y_pred)*100)
 
 	print("Report : ",
-	classification_report(y_test, y_pred))
+	classification_report(y_test, y_pred, zero_division=0))
 
 # Main function
 def main():
