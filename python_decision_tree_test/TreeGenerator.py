@@ -9,7 +9,13 @@ from sklearn import tree
 from sklearn.tree import export_graphviz
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
-#from sklearn.datasets import load_iris
+
+#########################################################################
+# TO DO:
+#	1) Place methods inside of a single class. Make connectDB own class.
+#	2) Rename variable names to camelCase
+#	3) Change importdatafunction to accomodate new DB design
+#########################################################################
 
 # Function for connecting to MySQL Database
 def connectDB():

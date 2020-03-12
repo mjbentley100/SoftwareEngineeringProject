@@ -5,6 +5,12 @@ from python_speech_features import mfcc
 from sklearn import preprocessing
 import numpy as np
 
+#########################################################################
+# TO DO:
+#	1) Place methods inside of a single class. Make connectDB own class.
+#	2) Document code && clean up
+#########################################################################
+
 # Function for connecting to MySQL Database
 def connectDB():
 	db_connection = sql.connect(host='localhost', database='test_schema', user='test_user', password='test123')
@@ -53,7 +59,7 @@ def main():
 	for el in arr:
 		if (el != "-"):
 			mffcs = performMFCC("../girl_sing_sample/%s-%s/sample_%s.mp3" % (folder_no, folder_no + 49, str(count).zfill(3)))
-			print(len(mffcs))
+			#print(len(mffcs))
 			try:
 				importData(el, mffcs)
 			except:

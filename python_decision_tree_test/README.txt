@@ -1,5 +1,8 @@
 This is a current test environment and program for generating decision trees given data from the database. 
 
+****************** TO DO: UPDATE READ ME
+****************** CHECK PROGRAM FILES FOR SPECIFIC TO DO LISTS
+
 The files in this folder are as follows: 
  -- venv (dir): Python environment - holds all dependencies and modules used by python program. 
 		Requirements: 
