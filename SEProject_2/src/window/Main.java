@@ -32,6 +32,15 @@ public class Main extends Canvas implements Runnable{
 
 
     private Main(){
+
+        //For testing only, remove later*********************
+        SoundRecorder se = new SoundRecorder();
+        se.recordAudio();
+        //remove later***************************************
+
+
+
+
         width = 500;
         height = 500;
         new MainFrame(width, height, "Face Guy 3000", this);
