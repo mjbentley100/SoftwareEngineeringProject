@@ -16,6 +16,7 @@ def connectDB():
 	db_connection = sql.connect(host='localhost', database='test_schema', user='test_user', password='test123')
 	return db_connection
 
+# Function that determines the classifications for audio samples
 def getClassifierArray(classifications):
 	 count = 0
 	 arr = []
