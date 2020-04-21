@@ -1,0 +1,7 @@
+docopt
+requests
+robobrowser
+pyprind
+six
+js2py
+packaging
