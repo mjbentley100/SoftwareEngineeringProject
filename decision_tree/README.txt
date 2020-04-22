@@ -1,6 +1,6 @@
 This is a current test environment and program for generating decision trees given data from the database. 
 
-****************** TO DO: UPDATE READ ME
+****************** UPDATED: 4/3/2020
 ****************** CHECK PROGRAM FILES FOR SPECIFIC TO DO LISTS
 
 The files in this folder are as follows: 

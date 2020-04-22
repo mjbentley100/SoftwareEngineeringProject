@@ -32,11 +32,11 @@ def importdata():
 # Function to split the dataset into train/test data using cross-validation
 def splitdataset(balance_data):
 	# Separate the target variable from features
-	X = balance_data.values[:, 2:14] # Features
+	X = balance_data.values[:, 1:18] # Features
 	Y = balance_data.values[:, 0] # Target variable
 
 	# Split the dataset into train/test
-	X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.2, random_state = 100)
+	X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.3, random_state = 100)
 
 	# Decision tree generator test
 	#clf = tree.DecisionTreeClassifier(criterion = "gini",
@@ -50,7 +50,7 @@ def splitdataset(balance_data):
 def train_using_gini(X_train, X_test, y_train):
 	# Create the classifier object
 	clf_gini = DecisionTreeClassifier(criterion = "gini",
-			random_state = 100, max_depth = 6, min_samples_leaf = 3, max_features="auto")
+			random_state = 100, max_depth = None, min_samples_leaf = 2, max_features="auto")
 
 	# Perform training
 	clf_gini.fit(X_train, y_train)
@@ -62,7 +62,6 @@ def train_using_entropy(X_train, X_test, y_train):
 	# Construct decision tree with entropy
 	clf_entropy = DecisionTreeClassifier(criterion = "entropy",
 					random_state = 100, max_depth = None, min_samples_leaf = 2, max_features="auto")
-
 	# Perform training
 	clf_entropy.fit(X_train, y_train)
 	return clf_entropy
