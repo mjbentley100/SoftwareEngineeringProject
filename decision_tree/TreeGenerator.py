@@ -1,7 +1,7 @@
 # Import the required packages
 import numpy as np
 import pandas as pd
-import mysql.connector as sql
+import DBConnection as db
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
@@ -12,103 +12,105 @@ from sklearn.metrics import classification_report
 
 #########################################################################
 # TO DO:
-#	1) Place methods inside of a single class. Make connectDB own class.
-#	2) Rename variable names to camelCase
-#	3) Change importdata function to accomodate new DB design
+#	1) Document && Clean up code
+#	2) Connect tree object to user interface
 #########################################################################
 
-# Function for connecting to MySQL Database
-def connectDB():
-	db_connection = sql.connect(host='localhost', database='test_schema', user='test_user', password='test123')
-	return db_connection
-
 # Function used to import dataset from DB
-def importdata():
-	db_connection = connectDB()
-	balance_data = pd.read_sql('SELECT * FROM test_table', con=db_connection);
-	db_connection.close();
-	return balance_data
+class TreeGenerator:
+	csv_file = ""
 
-# Function to split the dataset into train/test data using cross-validation
-def splitdataset(balance_data):
-	# Separate the target variable from features
-	X = balance_data.values[:, 1:18] # Features
-	Y = balance_data.values[:, 0] # Target variable
+	def __init__(self, file):
+		self.csv_file = file
 
-	# Split the dataset into train/test
-	X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.3, random_state = 100)
+	def importdata(self):
+		#db_connection = db.connectDB()
+		#balance_data = pd.read_sql('SELECT * FROM test_table', con=db_connection);
+		#db_connection.close();
+		balance_data = pd.read_csv(self.csv_file, header=0);
+		return balance_data
 
-	# Decision tree generator test
-	#clf = tree.DecisionTreeClassifier(criterion = "gini",
-	#		random_state = 100, max_depth = 6, min_samples_leaf = 2, max_features="log2", min_impurity_decrease=0.5)
-	#clf = clf.fit(X, Y)
-	#tree.export_graphviz(clf, out_file='test.dot') # create graph of decision tree
+	# Function to split the dataset into train/test data using cross-validation
+	def splitdataset(self, balance_data):
+		# Separate the target variable from features
+		X = balance_data.values[:, 1:18] # Features
+		Y = balance_data.values[:, 0] # Target variable
 
-	return X, Y, X_train, X_test, y_train, y_test
+		# Split the dataset into train/test
+		X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.3, random_state = 100)
 
-# Function to perform training using GINI index
-def train_using_gini(X_train, X_test, y_train):
-	# Create the classifier object
-	clf_gini = DecisionTreeClassifier(criterion = "gini",
-			random_state = 100, max_depth = None, min_samples_leaf = 2, max_features="auto")
+		# Decision tree generator test
+		#clf = tree.DecisionTreeClassifier(criterion = "gini",
+		#		random_state = 100, max_depth = 6, min_samples_leaf = 2, max_features="log2", min_impurity_decrease=0.5)
+		#clf = clf.fit(X, Y)
+		#tree.export_graphviz(clf, out_file='test.dot') # create graph of decision tree
 
-	# Perform training
-	clf_gini.fit(X_train, y_train)
-	#tree.export_graphviz(clf_gini, out_file='test.dot') # create graph of decision tree
-	return clf_gini
+		return X, Y, X_train, X_test, y_train, y_test
 
-# Function to perform training using Entropy
-def train_using_entropy(X_train, X_test, y_train):
-	# Construct decision tree with entropy
-	clf_entropy = DecisionTreeClassifier(criterion = "entropy",
-					random_state = 100, max_depth = None, min_samples_leaf = 2, max_features="auto")
-	# Perform training
-	clf_entropy.fit(X_train, y_train)
-	return clf_entropy
+	# Function to perform training using GINI index
+	def train_using_gini(self, X_train, X_test, y_train):
+		# Create the classifier object
+		clf_gini = DecisionTreeClassifier(criterion = "gini",
+				random_state = 100, max_depth = None, min_samples_leaf = 2, max_features="auto")
+
+		# Perform training
+		clf_gini.fit(X_train, y_train)
+		#tree.export_graphviz(clf_gini, out_file='test.dot') # create graph of decision tree
+		return clf_gini
+
+	# Function to perform training using Entropy
+	def train_using_entropy(self, X_train, X_test, y_train):
+		# Construct decision tree with entropy
+		clf_entropy = DecisionTreeClassifier(criterion = "entropy",
+						random_state = 100, max_depth = None, min_samples_leaf = 2, max_features="auto")
+		# Perform training
+		clf_entropy.fit(X_train, y_train)
+		return clf_entropy
 
 
-# Function to make predictions
-def prediction(X_test, clf_object):
+	# Function to make predictions
+	def prediction(self, X_test, clf_object):
 
-	# Predicton on test with giniIndex
-	y_pred = clf_object.predict(X_test)
-	print("Predicted values:")
-	print(y_pred)
-	return y_pred
+		# Predicton on test with giniIndex
+		y_pred = clf_object.predict(X_test)
+		print("Predicted values:")
+		print(y_pred)
+		return y_pred
 
-# Function to calculate accuracy
-def cal_accuracy(y_test, y_pred):
+	# Function to calculate accuracy
+	def cal_accuracy(self, y_test, y_pred):
 
-	print("Confusion Matrix: ",
-		confusion_matrix(y_test, y_pred))
+		print("Confusion Matrix: ",
+			confusion_matrix(y_test, y_pred))
 
-	print ("Accuracy : ",
-	accuracy_score(y_test,y_pred)*100)
+		print ("Accuracy : ",
+		accuracy_score(y_test,y_pred)*100)
 
-	print("Report : ",
-	classification_report(y_test, y_pred, zero_division=0))
+		print("Report : ",
+		classification_report(y_test, y_pred, zero_division=0))
 
 # Main function
 def main():
+	tree = TreeGenerator("training_data.csv")
 	# Build dataset with train/test split
-	data = importdata()
+	data = tree.importdata()
 	print(data)
-	X, Y, X_train, X_test, y_train, y_test = splitdataset(data)
+	X, Y, X_train, X_test, y_train, y_test = tree.splitdataset(data)
 
-	clf_gini = train_using_gini(X_train, X_test, y_train)
-	clf_entropy = train_using_entropy(X_train, X_test, y_train)
+	clf_gini = tree.train_using_gini(X_train, X_test, y_train)
+	clf_entropy = tree.train_using_entropy(X_train, X_test, y_train)
 
 	#Perform tests using Gini Index and Entropy
 	print("Results Using Gini Index:")
 
 	# Prediction using gini
-	y_pred_gini = prediction(X_test, clf_gini)
-	cal_accuracy(y_test, y_pred_gini)
+	y_pred_gini = tree.prediction(X_test, clf_gini)
+	tree.cal_accuracy(y_test, y_pred_gini)
 
 	print("Results Using Entropy:")
 	# Prediction using entropy
-	y_pred_entropy = prediction(X_test, clf_entropy)
-	cal_accuracy(y_test, y_pred_entropy)
+	y_pred_entropy = tree.prediction(X_test, clf_entropy)
+	tree.cal_accuracy(y_test, y_pred_entropy)
 
 
 # Calling function for Main
