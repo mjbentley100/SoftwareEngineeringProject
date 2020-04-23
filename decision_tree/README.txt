@@ -1,8 +1,7 @@
-This is a current test environment and program for generating decision trees given data from the database. 
-
-****************** UPDATED: 4/3/2020
+****************** UPDATED: 4/23/2020
 ****************** CHECK PROGRAM FILES FOR SPECIFIC TO DO LISTS
 
+This folder contains code and dependencies used to generate the decision tree. 
 The files in this folder are as follows: 
  -- venv (dir): Python environment - holds all dependencies and modules used by python program. 
 		Requirements: 
@@ -39,16 +38,24 @@ The files in this folder are as follows:
 -- README (txt): Guide outlining the purposes and uses of the files in this folder.  
 
 -- TreeGenerator.py (py): Python code that does the following: 
-			> Connects to database via MySQL server
 			> Parses data from database into train and test data
 			> Generates decision trees that are trained using either Gini index or Entropy
 			> Determines accuracy of decision trees based on tests performed using the two techniques
 
--- TrainingData.py (py): Python code that does the following: 
-			> Connects to database via MySQL Server
+-- TrainingDataGenerator.py (py): Python code that does the following: 
 			> Determines the classifications for audio samples
-			> Translates audio samples into distinct classifying features using MFCC analysis
+			> Translates audio samples into distinct classifying features using various audio analysis techniques
 			> Inserts transformed data and its classifications into the database for future use
+			> Converts DB information into .csv 
 
--- test.sql (sql): file containing SQL commands to construct database table  
+-- DBConnection.py (py): Python code used to connect to database via the MySQL server
+
+-- training_data.csv (csv): CSV containing training data from MySQL Database
+
+-- test_schema_test_table.sql (sql): file containing SQL commands to construct database table
+
+-- __init__.py (py): initilizer python script (doesn't do anything) 
+
+-- classifications (txt): a list mapping classifiers to audio samples; used for training data generator
+
 		
