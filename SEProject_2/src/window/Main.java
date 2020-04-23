@@ -10,6 +10,12 @@ public class Main extends Canvas implements Runnable{
     private boolean running = false;
     public Handler handler;
 
+    //sound Handler
+    private SoundRecorder se;
+
+
+    //testing
+    private int testCount = 0;
 
     //Variables
     private int width;
@@ -33,12 +39,7 @@ public class Main extends Canvas implements Runnable{
 
     private Main(){
 
-        //For testing only, remove later*********************
-        SoundRecorder se = new SoundRecorder();
-        se.recordAudio();
-        //remove later***************************************
-
-
+        se = new SoundRecorder();
 
 
         width = 500;
@@ -110,6 +111,9 @@ public class Main extends Canvas implements Runnable{
         if (ProjState == state.MENU) {
 
         } else if (numtick % 10 == 1){
+            se.recordAudio();
+            System.out.println("Main loop " + testCount);
+            testCount++;
             face.tick();
         }
 

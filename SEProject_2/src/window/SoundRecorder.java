@@ -6,8 +6,9 @@ import java.io.IOException;
 
 public class SoundRecorder {
 
-    AudioFormat format;
-    DataLine.Info info;
+    private AudioFormat format;
+    private DataLine.Info info;
+    private int count = 0;
 
 
 
@@ -44,6 +45,8 @@ public class SoundRecorder {
                         AudioSystem.write(stream, AudioFileFormat.Type.WAVE, audioFile);
                     }
                     catch(IOException io) {io.printStackTrace();}
+                    System.out.println("recorder " + count);
+                    count++;
                 }
             };
             thread.start();

@@ -23,7 +23,7 @@ public class TreeNode {
 	}
 	
 	//Methods
-	public setValue(double val) {
+	public void setValue(double val) {
 		this.value = val;
 	}
 }

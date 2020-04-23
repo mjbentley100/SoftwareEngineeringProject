@@ -28,7 +28,7 @@ public class DecisionTree {
 		leaf_text = leaf_text.replace("[[", "");
 		leaf_text = leaf_text.replace("]]", "");
 		leaf_text = leaf_text.replace(" ", "");
-		leaf_text == leaf_text.replace(".", "");
+		leaf_text = leaf_text.replace(".", "");
 		for(int i = 0; i < 9; i++) {
 			values[i] = leaf_text.charAt(i);
 		}
@@ -39,6 +39,8 @@ public class DecisionTree {
 	 * Generate a decision tree based on a text file
 	 * @return 0 if successful
 	 */
+
+
 	//TODO
 	//Parse leaf nodes and populate with face values
 	public int createTree() {
