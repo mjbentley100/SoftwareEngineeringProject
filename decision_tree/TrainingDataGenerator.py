@@ -63,7 +63,7 @@ class TrainingDataGenerator:
 		cursor.execute(sql_stmt)
 		res = cursor.fetchall()
 		c = csv.writer(open('training_data.csv', 'w'))
-		header = { "sound", "mfcc 1",  "mfcc 2",  "mfcc 3",  "mfcc 4",  "mfcc 5", "mfcc 6", "mfcc 7", "mfcc 8", "mfcc 9", "mfcc 10", "mfcc 11", "mfcc 12", "chroma_stft", "spec_cent", "spec_bw", "rolloff", "zcr", "ID"}
+		header = ["sound", "mfcc 1",  "mfcc 2", "mfcc 3", "mfcc 4", "mfcc 5", "mfcc 6", "mfcc 7", "mfcc 8", "mfcc 9", "mfcc 10", "mfcc 11", "mfcc 12", "chroma_stft", "spec_cent", "spec_bw", "rolloff", "zcr", "ID"]
 		c.writerow(header)
 		for x in res:
 			c.writerow(x)
