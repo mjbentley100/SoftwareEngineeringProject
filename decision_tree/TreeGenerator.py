@@ -83,11 +83,40 @@ class TreeGenerator:
 		print("Confusion Matrix: ",
 			confusion_matrix(y_test, y_pred))
 
+		accu = accuracy_score(y_test,y_pred)*100
 		print ("Accuracy : ",
 		accuracy_score(y_test,y_pred)*100)
 
 		print("Report : ",
 		classification_report(y_test, y_pred, zero_division=0))
+		
+		return accu
+	
+# Function to recursively get tree info for text translation
+def print_tree(tree, node, depth):
+	ret_text = ""
+	# Naming features commented out for now
+	#features = []
+	#for feature in feature_names:
+	#	if(feature != tree.TREE_UNDEFINED):
+	#		features[i] = feature
+	#	else:
+	#		features[i] = "undefined"
+	indent = "~" * (depth - 1)
+	# Not a leaf node
+	if(tree.children_left[node] != tree.children_right[node]):
+		#name = features[node]
+		threshold = tree.threshold[node]
+		#print("{}{}<={}".format(indent, name, threshold))
+		ret_text = ret_text + ("{}<={}\n".format(indent, threshold))
+		ret_text = ret_text + print_tree(tree, tree.children_left[node], depth + 1)
+		#print("{}{}>{}".format(indent, name, threshold))
+		ret_text = ret_text + ("{}>{}\n".format(indent, threshold))
+		ret_text = ret_text + print_tree(tree, tree.children_right[node], depth + 1)
+	# Leaf node
+	else:
+		ret_text = ret_text + ("{}{}\n".format(indent, tree.value[node]))
+	return ret_text
 
 # Main function
 def main():
@@ -105,12 +134,20 @@ def main():
 
 	# Prediction using gini
 	y_pred_gini = tree.prediction(X_test, clf_gini)
-	tree.cal_accuracy(y_test, y_pred_gini)
+	gini_accu = tree.cal_accuracy(y_test, y_pred_gini)
 
 	print("Results Using Entropy:")
 	# Prediction using entropy
 	y_pred_entropy = tree.prediction(X_test, clf_entropy)
-	tree.cal_accuracy(y_test, y_pred_entropy)
+	entrop_accu = tree.cal_accuracy(y_test, y_pred_entropy)
+	
+	# Write accurate tree to text file
+	trtxt = open("trtxt.txt", "w")
+	if(gini_accu > entrop_accu):
+		trtxt.write(print_tree(clf_gini.tree_, 0, 1))
+	else:
+		trtxt.write(print_tree(clf_entropy.tree_, 0, 1))
+	trtxt.close()
 
 
 # Calling function for Main
