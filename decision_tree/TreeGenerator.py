@@ -103,7 +103,7 @@ def print_tree(tree, node, depth):
 	#	else:
 	#		features[i] = "undefined"
 	indent = "~" * (depth - 1)
-    # Not a leaf node
+	# Not a leaf node
 	if(tree.children_left[node] != tree.children_right[node]):
 		#name = features[node]
 		threshold = tree.threshold[node]
