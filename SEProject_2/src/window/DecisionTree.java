@@ -17,6 +17,25 @@ public class DecisionTree {
 	
 	//Methods
 	/**
+	 * Take the array string from a leaf node and generate the corresponding face value
+	 * @param leaf_text The value stored in the leaf node
+	 * @return The number corresponding to the appropriate face
+	 */
+	//TODO
+	//Convert the int values to a single face int
+	public int generateFaceVal(String leaf_text) {
+		int[] values = new int[9];
+		leaf_text = leaf_text.replace("[[", "");
+		leaf_text = leaf_text.replace("]]", "");
+		leaf_text = leaf_text.replace(" ", "");
+		leaf_text == leaf_text.replace(".", "");
+		for(int i = 0; i < 9; i++) {
+			values[i] = leaf_text.charAt(i);
+		}
+		return 0;
+	}
+	
+	/**
 	 * Generate a decision tree based on a text file
 	 * @return 0 if successful
 	 */
@@ -33,25 +52,66 @@ public class DecisionTree {
 			line = reader.readLine();
 			//Add all the other nodes
 			while(line != null) {
-				//True if the current line is already a node
+				//True if the node for this line has been created
 				Boolean created = false;
-				if(line.contains(">")) {
-					created = true;
-				}
 				//Depth of the tree
 				int depth = StringUtils.countMatches(line, "~");
 				line = line.replace("~", "");
 				//Get the right node id
-				for(int i = pow(2, depth) - 1; i < pow(2, depth + 1) - 1; i++) {
-					if(!created && !this.tree.exists(i, this.tree.root)) {
-						line = line.replace("<=", "");
-						//Add the node
-						if(i % 2 == 0) {
-							this.tree.addNode(parseDouble(line.trim()), -1, this.tree.root, (i - 2) / 2, false);
-						} else {
-							this.tree.addNode(parseDouble(line.trim()), -1, this.tree.root, (i - 1) / 2, true);
+				//Find the newest node in depth-1 and add this node as that node's child
+				for(int i = (int)pow(2, depth - 1) - 1; i < (int)pow(2, depth) - 1; i++) {
+					//Add testing nodes
+					if(line.contains("<=")) {
+						//If the depth isn't full yet
+						if(!created && !this.tree.exists(i, this.tree.root)) {
+							//Add the node
+							line = line.replace("<=", "");
+							//Right child
+							if(this.tree.getNode(i - 1, this.tree.root).left_child != null) {
+								this.tree.addNode(parseDouble(line.trim()), -1, this.tree.root, (i - 1) * 2 + 2, false);
+							//Left child
+							} else {
+								this.tree.addNode(parseDouble(line.trim()), -1, this.tree.root, (i - 1) * 2 + 1, true);
+							}
+							created = true;
 						}
-						created = true;
+						//If the depth is full
+						if(!created && i == (int)pow(2, depth) - 1) {
+							line = line.replace("<=", "");
+							//Right child
+							if(this.tree.getNode(i, this.tree.root).left_child != null) {
+								this.tree.addNode(parseDouble(line.trim()), -1, this.tree.root, i * 2 + 2, false);
+							//Left child
+							} else {
+								this.tree.addNode(parseDouble(line.trim()), -1, this.tree.root, i * 2 + 1, true);
+							}
+							created = true;
+						}
+					//Add leaf nodes
+					} else {
+						//If the depth isn't full yet
+						if(!created && !this.tree.exists(i, this.tree.root)) {
+							//Add the node
+							//Right child
+							if(this.tree.getNode(i - 1, this.tree.root).left_child != null) {
+								this.tree.addNode(-1, generateFaceVal(line), this.tree.root, (i - 1) * 2 + 2, false);
+							//Left child
+							} else {
+								this.tree.addNode(-1, generateFaceVal(line), this.tree.root, (i - 1) * 2 + 1, true);
+							}
+							created = true;
+						}
+						//If the depth is full
+						if(!created && i == (int)pow(2, depth) - 1) {
+							//Right child
+							if(this.tree.getNode(i, this.tree.root).left_child != null) {
+								this.tree.addNode(-1, generateFaceVal(line), this.tree.root, i * 2 + 2, false);
+							//Left child
+							} else {
+								this.tree.addNode(-1, generateFaceVal(line), this.tree.root, i * 2 + 1, true);
+							}
+							created = true;
+						}
 					}
 				}
 				line = reader.readLine();

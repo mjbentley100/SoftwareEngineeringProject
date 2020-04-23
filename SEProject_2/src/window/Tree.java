@@ -46,7 +46,7 @@ public class Tree {
 	 * Checks if a node exists in the tree using a recursive method
 	 * @param id The id of the node to be checked
 	 * @param base The current root
-	 * @return
+	 * @return True if the node exists in the current tree
 	 */
 	public Boolean exists(int id, TreeNode base) {
 		//If the root matches
@@ -63,6 +63,27 @@ public class Tree {
 				in_right = exists(base.right_child);
 			}
 			return in_left || in_right;
+		}
+	}
+	
+	/**
+	 * Finds the node of a tree based on id - Assumes that the node exists somewhere
+	 * @param id The id of the node to be found
+	 * @param base The current root
+	 * @return The node to be found
+	 */
+	public TreeNode getNode(int id, TreeNode base) {
+		//If the root matches
+		if(base.id == id) {
+			return base;
+		} else {
+			//If in the left subtree
+			if(exists(id, base.left_child)) {
+				return getNode(id, base.left_child);
+			//If in the right subtree
+			} else {
+				return getNode(id, base.right_child);
+			}
 		}
 	}
 }
