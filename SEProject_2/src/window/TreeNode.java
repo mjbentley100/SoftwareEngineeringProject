@@ -3,47 +3,23 @@ package window;
 public class TreeNode {
 	
 	//Variables
-	//Children of the current node
 	public TreeNode left_child;
 	public TreeNode right_child;
-	//True if the node is a leaf
 	public Boolean is_leaf;
-	//Value for face (if leaf) or testing (if not leaf)
+	//Testing value if node isn't a leaf
 	public double value;
-	//Unique identifier of node in a tree
 	public int id;
+	//Number of the face of a leaf node
+	public int face_value;
 	
-	//Constructors
-	public TreeNode(TreeNode lchild, double val, TreeNode rchild, int id) {
-		this.left_child = lchild;
-		this.right_child = rchild;
-		this.is_leaf = false;
-		this.value = val;
-		this.id = id;
-	}
-	
-	public TreeNode(TreeNode lchild, double val, int id) {
-		this.left_child = lchild;
-		this.right_child = null;
-		this.is_leaf = false;
-		this.value = val;
-		this.id = id;
-	}
-	
-	public TreeNode(double val, TreeNode rchild, int id) {
-		this.left_child = null;
-		this.right_child = rchild;
-		this.is_leaf = false;
-		this.value = val;
-		this.id = id;
-	}
-	
-	public TreeNode(double val, int id) {
+	//Constructor
+	public TreeNode(double val, int id, int face_val) {
 		this.left_child = null;
 		this.right_child = null;
 		this.is_leaf = true;
 		this.value = val;
 		this.id = id;
+		this.face_value = face_val;
 	}
 	
 	//Methods

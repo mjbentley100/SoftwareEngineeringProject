@@ -7,7 +7,7 @@ import java.lang.Math;
 
 public class DecisionTree {
 	
-	//Variables
+	//Variable
 	public Tree tree;
 	
 	//Constructor
@@ -20,6 +20,8 @@ public class DecisionTree {
 	 * Generate a decision tree based on a text file
 	 * @return 0 if successful
 	 */
+	//TODO
+	//Parse leaf nodes and populate with face values
 	public int createTree() {
 		//Read in the text file
 		try {
@@ -45,9 +47,9 @@ public class DecisionTree {
 						line = line.replace("<=", "");
 						//Add the node
 						if(i % 2 == 0) {
-							this.tree.addNode(parseDouble(line.trim()), this.tree.root, (i - 2) / 2, false);
+							this.tree.addNode(parseDouble(line.trim()), -1, this.tree.root, (i - 2) / 2, false);
 						} else {
-							this.tree.addNode(parseDouble(line.trim()), this.tree.root, (i - 1) / 2, true);
+							this.tree.addNode(parseDouble(line.trim()), -1, this.tree.root, (i - 1) / 2, true);
 						}
 						created = true;
 					}
@@ -62,6 +64,9 @@ public class DecisionTree {
 		}
 	}
 	
+	//TODO
+	//Take in audio - probably via .wav file
+	//Convert to decimal the same way Python did it
 	public double parseAudio() {
 		double audio_val = 0;
 		return audio_val;
@@ -75,11 +80,11 @@ public class DecisionTree {
 	 */
 	public int getFace(double value, TreeNode base) {
 		if(base.is_leaf) {
-			return x;
+			return base.face_value;
 		} else if (value <= base.value) {
-			return parseAudio(value, base.left_child);
+			return getFace(value, base.left_child);
 		} else {
-			return parseAudio(value, base.right_child);
+			return getFace(value, base.right_child);
 		}
 	}
 }
