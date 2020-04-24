@@ -2,8 +2,10 @@ package window;
 
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.lang.Math;
+import java.util.Scanner;
 
 public class DecisionTree {
 	
@@ -145,7 +147,16 @@ public class DecisionTree {
 	//TODO
 	//Take in audio - probably via .wav file
 	//Convert to decimal the same way Python did it
+	// NOTE: AudioAnalyzer must be running at the same time
+	// TODO: Possibly find a way to run python code as another thread? 
 	public double parseAudio() {
+		try{
+        	// reads file modified by AudioAnalyzer.py 
+            File f = new File("check.txt");
+            Scanner read = new Scanner(f);
+            // This is an array of features printed into the file check.txt
+            System.out.println(read.nextLine());
+        }catch(Exception e){}
 		double audio_val = 0;
 		return audio_val;
 	}
