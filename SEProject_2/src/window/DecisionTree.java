@@ -17,6 +17,20 @@ public class DecisionTree {
 	
 	//Methods
 	/**
+	 * Read in a line and count the number of ~
+	 * @param s The string to be checked
+	 * @return The number of ~ in s
+	 */
+	public int countDepth(String s) {
+		int count = 0;
+		for(int i = 0; i < s.length(); i++) {
+			if(s.charAt(i) =='~') {
+				count++;
+			}
+		}
+		return count;
+	}
+	/**
 	 * Take the array string from a leaf node and generate the corresponding face value
 	 * @param leaf_text The value stored in the leaf node
 	 * @return The number corresponding to the appropriate face
@@ -39,10 +53,6 @@ public class DecisionTree {
 	 * Generate a decision tree based on a text file
 	 * @return 0 if successful
 	 */
-
-
-	//TODO
-	//Parse leaf nodes and populate with face values
 	public int createTree() {
 		//Read in the text file
 		try {
@@ -50,18 +60,18 @@ public class DecisionTree {
 			String line = reader.readLine();
 			//Add the value of the root node
 			line = line.replace("<=", "");
-			this.tree.root.setValue(parseDouble(line.trim()));
+			this.tree.root.setValue(Double.parseDouble(line.trim()));
 			line = reader.readLine();
 			//Add all the other nodes
 			while(line != null) {
 				//True if the node for this line has been created
 				Boolean created = false;
 				//Depth of the tree
-				int depth = StringUtils.countMatches(line, "~");
+				int depth = this.countDepth(line);
 				line = line.replace("~", "");
 				//Get the right node id
 				//Find the newest node in depth-1 and add this node as that node's child
-				for(int i = (int)pow(2, depth - 1) - 1; i < (int)pow(2, depth) - 1; i++) {
+				for(int i = (int)Math.pow(2, depth - 1) - 1; i < (int)Math.pow(2, depth) - 1; i++) {
 					//Add testing nodes
 					if(line.contains("<=")) {
 						//If the depth isn't full yet
@@ -70,22 +80,22 @@ public class DecisionTree {
 							line = line.replace("<=", "");
 							//Right child
 							if(this.tree.getNode(i - 1, this.tree.root).left_child != null) {
-								this.tree.addNode(parseDouble(line.trim()), -1, this.tree.root, (i - 1) * 2 + 2, false);
+								this.tree.addNode(Double.parseDouble(line.trim()), -1, this.tree.root, (i - 1) * 2 + 2, false);
 							//Left child
 							} else {
-								this.tree.addNode(parseDouble(line.trim()), -1, this.tree.root, (i - 1) * 2 + 1, true);
+								this.tree.addNode(Double.parseDouble(line.trim()), -1, this.tree.root, (i - 1) * 2 + 1, true);
 							}
 							created = true;
 						}
 						//If the depth is full
-						if(!created && i == (int)pow(2, depth) - 1) {
+						if(!created && i == (int)Math.pow(2, depth) - 1) {
 							line = line.replace("<=", "");
 							//Right child
 							if(this.tree.getNode(i, this.tree.root).left_child != null) {
-								this.tree.addNode(parseDouble(line.trim()), -1, this.tree.root, i * 2 + 2, false);
+								this.tree.addNode(Double.parseDouble(line.trim()), -1, this.tree.root, i * 2 + 2, false);
 							//Left child
 							} else {
-								this.tree.addNode(parseDouble(line.trim()), -1, this.tree.root, i * 2 + 1, true);
+								this.tree.addNode(Double.parseDouble(line.trim()), -1, this.tree.root, i * 2 + 1, true);
 							}
 							created = true;
 						}
@@ -104,7 +114,7 @@ public class DecisionTree {
 							created = true;
 						}
 						//If the depth is full
-						if(!created && i == (int)pow(2, depth) - 1) {
+						if(!created && i == (int)Math.pow(2, depth) - 1) {
 							//Right child
 							if(this.tree.getNode(i, this.tree.root).left_child != null) {
 								this.tree.addNode(-1, generateFaceVal(line), this.tree.root, i * 2 + 2, false);

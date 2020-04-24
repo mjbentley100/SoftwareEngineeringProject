@@ -26,4 +26,8 @@ public class TreeNode {
 	public void setValue(double val) {
 		this.value = val;
 	}
+	
+	public int getID() {
+		return this.id;
+	}
 }

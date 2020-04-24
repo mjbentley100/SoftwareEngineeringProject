@@ -1,7 +1,5 @@
 package window;
 
-import javax.swing.tree.TreeNode;
-
 public class Tree {
 	
 	//Variable
@@ -9,7 +7,7 @@ public class Tree {
 	
 	//Constructor
 	//Takes in the value of the root node
-	public Tree(int val) {
+	public Tree(double val) {
 		this.root = new TreeNode(val, 0, -1);
 	}
 	
@@ -22,9 +20,9 @@ public class Tree {
 	 * @param parent_id The parent of the new node
 	 * @param is_left True if the new node is a left child
 	 */
-	public addNode(double val, int face, TreeNode base, int parent_id, Boolean is_left) {
+	public void addNode(double val, int face, TreeNode base, int parent_id, Boolean is_left) {
 		//If current root and parent match, add the node
-		if(base.id == parent_id) {
+		if(base.getID() == parent_id) {
 			if(is_left) {
 				base.left_child = new TreeNode(val, 2 * parent_id + 1, face);
 			} else {
@@ -57,10 +55,10 @@ public class Tree {
 			Boolean in_left = false;
 			Boolean in_right = false;
 			if(base.left_child != null) {
-				in_left = exists(base.left_child);
+				in_left = exists(id, base.left_child);
 			}
 			if(base.right_child != null) {
-				in_right = exists(base.right_child);
+				in_right = exists(id, base.right_child);
 			}
 			return in_left || in_right;
 		}
