@@ -4,7 +4,14 @@ public class Tree {
 	
 	//Variable
 	public TreeNode root;
-	
+
+
+
+	public TreeNode getRoot() {
+		return this.root;
+	}
+
+
 	//Constructor
 	//Takes in the value of the root node
 	public Tree(double val) {

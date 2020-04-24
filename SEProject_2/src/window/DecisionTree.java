@@ -14,6 +14,12 @@ public class DecisionTree {
 	public DecisionTree() {
 		this.tree = new Tree(0);
 	}
+
+
+	public Tree getTree() {
+		return this.tree;
+	}
+
 	
 	//Methods
 	/**

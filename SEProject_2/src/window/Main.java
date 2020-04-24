@@ -26,6 +26,9 @@ public class Main extends Canvas implements Runnable{
     public Menu menu;
     public FaceWindow face;
 
+    //Decision tree
+    private DecisionTree tree;
+
     //Main Thread
     private Thread thread;
 
@@ -40,7 +43,8 @@ public class Main extends Canvas implements Runnable{
     private Main(){
 
         se = new SoundRecorder();
-
+        tree = new DecisionTree();
+        tree.createTree();
 
         width = 500;
         height = 500;
@@ -112,8 +116,9 @@ public class Main extends Canvas implements Runnable{
 
         } else if (numtick % 10 == 1){
             se.recordAudio();
-            System.out.println("Main loop " + testCount);
-            testCount++;
+            //System.out.println("Main loop " + testCount);
+            //testCount++;
+            tree.getFace(tree.parseAudio(), tree.getTree().getRoot());
             face.tick();
         }
 
