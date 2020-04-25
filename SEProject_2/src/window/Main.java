@@ -118,8 +118,7 @@ public class Main extends Canvas implements Runnable{
             se.recordAudio();
             //System.out.println("Main loop " + testCount);
             //testCount++;
-            tree.getFace(tree.parseAudio(), tree.getTree().getRoot());
-            face.tick();
+            face.tick(tree.getFace(tree.parseAudio(), tree.getTree().getRoot()));
         }
 
     }

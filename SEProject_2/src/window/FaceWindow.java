@@ -66,12 +66,12 @@ public class FaceWindow extends MouseAdapter {
     }
 
 
-    public void tick(){
+    public void tick(int picker){
 
         if (active) {
 
 
-            changeFace();
+            changeFace(picker);
 
             for (int i = 0; i < 16; i++) {
                 for (int j = 0; j < 16; j++) {
@@ -132,8 +132,8 @@ public class FaceWindow extends MouseAdapter {
     }
 
 
-    private void changeFace(){
-        int picker = rand.nextInt(7);
+    private void changeFace(int picker){
+        //int picker = rand.nextInt(7);
 
         if (picker == 0) {
             currentFace = this.faces.getFace1();
