@@ -37,7 +37,7 @@ class TreeGenerator:
 		Y = balance_data.values[:, 0] # Target variable
 
 		# Split the dataset into train/test
-		X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.3, random_state = 100)
+		X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.1, random_state = 100)
 
 		# Decision tree generator test
 		#clf = tree.DecisionTreeClassifier(criterion = "gini",
@@ -51,7 +51,7 @@ class TreeGenerator:
 	def train_using_gini(self, X_train, X_test, y_train):
 		# Create the classifier object
 		clf_gini = DecisionTreeClassifier(criterion = "gini",
-				random_state = 100, max_depth = None, min_samples_leaf = 2, max_features="auto")
+				random_state = 100, max_depth = 6, min_samples_leaf = 2, max_features="auto")
 
 		# Perform training
 		clf_gini.fit(X_train, y_train)
@@ -62,7 +62,7 @@ class TreeGenerator:
 	def train_using_entropy(self, X_train, X_test, y_train):
 		# Construct decision tree with entropy
 		clf_entropy = DecisionTreeClassifier(criterion = "entropy",
-						random_state = 100, max_depth = None, min_samples_leaf = 2, max_features="auto")
+						random_state = 100, max_depth = 6, min_samples_leaf = 2, max_features="auto")
 		# Perform training
 		clf_entropy.fit(X_train, y_train)
 		return clf_entropy
@@ -89,9 +89,9 @@ class TreeGenerator:
 
 		print("Report : ",
 		classification_report(y_test, y_pred, zero_division=0))
-		
+
 		return accu
-	
+
 # Function to recursively get tree info for text translation
 def print_tree(tree, node, depth):
 	ret_text = ""
@@ -140,7 +140,7 @@ def main():
 	# Prediction using entropy
 	y_pred_entropy = tree.prediction(X_test, clf_entropy)
 	entrop_accu = tree.cal_accuracy(y_test, y_pred_entropy)
-	
+
 	# Write accurate tree to text file
 	trtxt = open("trtxt.txt", "w")
 	if(gini_accu > entrop_accu):

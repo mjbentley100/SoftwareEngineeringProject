@@ -111,7 +111,7 @@ class TrainingDataGenerator:
 def main():
 	TDG = TrainingDataGenerator('classifications.txt')
 	#TDG.genTrainingData()
-	#TDG.exportTrainingData()
+	TDG.exportTrainingData()
 
 # Calling function for Main
 if __name__=="__main__":
