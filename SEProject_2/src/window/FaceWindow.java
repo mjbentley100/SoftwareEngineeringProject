@@ -70,7 +70,7 @@ public class FaceWindow extends MouseAdapter {
 
         if (active) {
 
-
+            System.out.println(picker);
             changeFace(picker);
 
             for (int i = 0; i < 16; i++) {
@@ -148,6 +148,8 @@ public class FaceWindow extends MouseAdapter {
         } else if (picker == 5) {
             currentFace = this.faces.getFace6();
         } else if (picker == 6) {
+            currentFace = this.faces.getFace7();
+        } else {
             currentFace = this.faces.getFace7();
         }
     }
