@@ -24,9 +24,6 @@ class TreeGenerator:
 		self.csv_file = file
 
 	def importdata(self):
-		#db_connection = db.connectDB()
-		#balance_data = pd.read_sql('SELECT * FROM test_table', con=db_connection);
-		#db_connection.close();
 		balance_data = pd.read_csv(self.csv_file, header=0);
 		return balance_data
 
@@ -38,6 +35,8 @@ class TreeGenerator:
 
 		# Split the dataset into train/test
 		X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.1, random_state = 100)
+		print(X_train)
+		print(y_train)
 
 		# Decision tree generator test
 		#clf = tree.DecisionTreeClassifier(criterion = "gini",

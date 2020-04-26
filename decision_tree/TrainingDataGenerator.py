@@ -59,11 +59,11 @@ class TrainingDataGenerator:
 	# @Param rolloff    mean spectral rolloff value
 	# @Param zcr     mean zero crossing rate
 	# @Param db_connection   MySQL database connection object
-	def importData(self, el, mfccs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection):
+	def importData(self, el, mfccs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection, file_name):
 		cursor = db_connection.cursor()
-		sql_stmt = "INSERT INTO test_table(`sound`, `mfcc 1`, `mfcc 2`, `mfcc 3`, `mfcc 4`, `mfcc 5`, `mfcc 6`, `mfcc 7`, `mfcc 8`, `mfcc 9`, `mfcc 10`, `mfcc 11`, `mfcc 12`, `chroma_stft`,`spec_cent`, `spec_bw`, `rolloff`, `zcr`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
+		sql_stmt = "INSERT INTO test_table(`sound`, `mfcc 1`, `mfcc 2`, `mfcc 3`, `mfcc 4`, `mfcc 5`, `mfcc 6`, `mfcc 7`, `mfcc 8`, `mfcc 9`, `mfcc 10`, `mfcc 11`, `mfcc 12`, `chroma_stft`,`spec_cent`, `spec_bw`, `rolloff`, `zcr`, `file`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
 		values = (int(el), '{:0.4f}'.format(mfccs[0]), '{:0.4f}'.format(mfccs[1]), '{:0.4f}'.format(mfccs[2]), '{:0.4f}'.format(mfccs[3]), '{:0.4f}'.format(mfccs[4]), '{:0.4f}'.format(mfccs[5]),
-		'{:0.4f}'.format(mfccs[6]), '{:0.4f}'.format(mfccs[7]), '{:0.4f}'.format(mfccs[8]), '{:0.4f}'.format(mfccs[9]), '{:0.4f}'.format(mfccs[10]), '{:0.4f}'.format(mfccs[11]), '{:0.4f}'.format(chroma_stft), '{:0.4f}'.format(spec_cent), '{:0.4f}'.format(spec_bw), '{:0.4f}'.format(rolloff), '{:0.4f}'.format(zcr))
+		'{:0.4f}'.format(mfccs[6]), '{:0.4f}'.format(mfccs[7]), '{:0.4f}'.format(mfccs[8]), '{:0.4f}'.format(mfccs[9]), '{:0.4f}'.format(mfccs[10]), '{:0.4f}'.format(mfccs[11]), '{:0.4f}'.format(chroma_stft), '{:0.4f}'.format(spec_cent), '{:0.4f}'.format(spec_bw), '{:0.4f}'.format(rolloff), '{:0.4f}'.format(zcr), file_name)
 		cursor.execute(sql_stmt, values)
 		db_connection.commit()
 
@@ -71,11 +71,11 @@ class TrainingDataGenerator:
 	def exportTrainingData(self):
 		db_connection = db.connectDB()
 		cursor = db_connection.cursor()
-		sql_stmt = "SELECT * FROM test_table"
+		sql_stmt = "SELECT sound, `mfcc 1`, `mfcc 2`, `mfcc 3`, `mfcc 4`, `mfcc 5`, `mfcc 6`, `mfcc 7`, `mfcc 8`, `mfcc 9`, `mfcc 10`, `mfcc 11`, `mfcc 12`, chroma_stft, spec_cent, spec_bw, rolloff, zcr FROM test_table"
 		cursor.execute(sql_stmt)
 		res = cursor.fetchall()
 		c = csv.writer(open('training_data.csv', 'w'))
-		header = ["sound", "mfcc 1",  "mfcc 2", "mfcc 3", "mfcc 4", "mfcc 5", "mfcc 6", "mfcc 7", "mfcc 8", "mfcc 9", "mfcc 10", "mfcc 11", "mfcc 12", "chroma_stft", "spec_cent", "spec_bw", "rolloff", "zcr", "ID"]
+		header = ["sound", "mfcc 1",  "mfcc 2", "mfcc 3", "mfcc 4", "mfcc 5", "mfcc 6", "mfcc 7", "mfcc 8", "mfcc 9", "mfcc 10", "mfcc 11", "mfcc 12", "chroma_stft", "spec_cent", "spec_bw", "rolloff", "zcr"]
 		c.writerow(header)
 		for x in res:
 			c.writerow(x)
@@ -97,7 +97,7 @@ class TrainingDataGenerator:
 			if (el != "-"):
 				mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr = self.getFeatures("../girl_sing_sample/%s-%s/sample_%s.mp3" % (folder_no, folder_no + 49, str(count).zfill(3)))
 				try:
-					self.importData(el, mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection)
+					self.importData(el, mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection, "sample_%s.mp3" % str(count).zfill(3))
 				except:
 					pass
 			count = count + 1
@@ -109,7 +109,7 @@ class TrainingDataGenerator:
 		while (count < 250):
 			try:
 				mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr = self.getFeatures("../ex_samples/ah/ex1_%s-%s/ex_sample_%s.mp3" % (folder_no, folder_no + 49, str(count).zfill(3)))
-				self.importData("1", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection)
+				self.importData("1", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection, "ex_sample_%s.mp3" % str(count).zfill(3))
 			except:
 				pass
 			count = count + 1
@@ -121,7 +121,7 @@ class TrainingDataGenerator:
 		while (count < 245):
 			try:
 				mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr = self.getFeatures("../ex_samples/ee/ex3_%s-%s/ex_sample3_%s.mp3" % (folder_no, folder_no + 49, str(count).zfill(3)))
-				self.importData("3", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection)
+				self.importData("3", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection, "ex_sample3_%s.mp3" % str(count).zfill(3))
 			except:
 				pass
 			count = count + 1
@@ -133,7 +133,7 @@ class TrainingDataGenerator:
 		while (count < 304):
 			try:
 				mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr = self.getFeatures("../ex_samples/eh/ex2_%s-%s/ex_sample2_%s.mp3" % (folder_no, folder_no + 49, str(count).zfill(3)))
-				self.importData("2", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection)
+				self.importData("2", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection, "ex_sample2_%s.mp3" % str(count).zfill(3))
 			except:
 				pass
 
@@ -146,7 +146,7 @@ class TrainingDataGenerator:
 		while (count < 507):
 			try:
 				mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr = self.getFeatures("../ex_samples/nn/ex6_%s-%s/ex_sample6_%s.mp3" % (folder_no, folder_no + 49, str(count).zfill(3)))
-				self.importData("6", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection)
+				self.importData("6", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection, "ex_sample6_%s.mp3" % str(count).zfill(3))
 			except:
 				pass
 
@@ -159,7 +159,7 @@ class TrainingDataGenerator:
 		while (count < 224):
 			try:
 				mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr = self.getFeatures("../ex_samples/oh/ex4_%s-%s/ex_sample4_%s.mp3" % (folder_no, folder_no + 49, str(count).zfill(3)))
-				self.importData("4", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection)
+				self.importData("4", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection, "ex_sample4_%s.mp3" % str(count).zfill(3))
 			except:
 				pass
 
@@ -172,7 +172,7 @@ class TrainingDataGenerator:
 		while (count < 348):
 			try:
 				mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr = self.getFeatures("../ex_samples/oo/ex5_%s-%s/ex_sample5_%s.mp3" % (folder_no, folder_no + 49, str(count).zfill(3)))
-				self.importData("5", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection)
+				self.importData("5", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection, "ex_sample5_%s.mp3" % str(count).zfill(3))
 			except:
 				pass
 
@@ -185,7 +185,7 @@ class TrainingDataGenerator:
 		while (count < 287):
 			try:
 				mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr = self.getFeatures("../ex_samples/sh/ex7_%s-%s/ex_sample7_%s.mp3" % (folder_no, folder_no + 49, str(count).zfill(3)))
-				self.importData("7", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection)
+				self.importData("7", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection, "ex_sample7_%s.mp3" % str(count).zfill(3))
 			except:
 				pass
 
@@ -198,7 +198,7 @@ class TrainingDataGenerator:
 		while (count < 397):
 			try:
 				mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr = self.getFeatures("../ex_samples/ss/ex8_%s-%s/ex_sample8_%s.mp3" % (folder_no, folder_no + 49, str(count).zfill(3)))
-				self.importData("8", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection)
+				self.importData("8", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection, "ex_sample8_%s.mp3" % str(count).zfill(3))
 			except:
 				pass
 
