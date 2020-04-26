@@ -99,7 +99,109 @@ class TrainingDataGenerator:
 				try:
 					self.importData(el, mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection)
 				except:
-					continue
+					pass
+			count = count + 1
+			if (count % 50 == 0):
+				folder_no = folder_no + 50
+
+		count = 15
+		folder_no = 0
+		while (count < 250):
+			try:
+				mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr = self.getFeatures("../ex_samples/ah/ex1_%s-%s/ex_sample_%s.mp3" % (folder_no, folder_no + 49, str(count).zfill(3)))
+				self.importData("1", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection)
+			except:
+				pass
+			count = count + 1
+			if (count % 50 == 0):
+				folder_no = folder_no + 50
+
+		count = 5
+		folder_no = 0
+		while (count < 245):
+			try:
+				mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr = self.getFeatures("../ex_samples/ee/ex3_%s-%s/ex_sample3_%s.mp3" % (folder_no, folder_no + 49, str(count).zfill(3)))
+				self.importData("3", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection)
+			except:
+				pass
+			count = count + 1
+			if (count % 50 == 0):
+				folder_no = folder_no + 50
+
+		count = 8
+		folder_no = 0
+		while (count < 304):
+			try:
+				mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr = self.getFeatures("../ex_samples/eh/ex2_%s-%s/ex_sample2_%s.mp3" % (folder_no, folder_no + 49, str(count).zfill(3)))
+				self.importData("2", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection)
+			except:
+				pass
+
+			count = count + 1
+			if (count % 50 == 0):
+				folder_no = folder_no + 50
+
+		count = 338
+		folder_no = 300
+		while (count < 507):
+			try:
+				mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr = self.getFeatures("../ex_samples/nn/ex6_%s-%s/ex_sample6_%s.mp3" % (folder_no, folder_no + 49, str(count).zfill(3)))
+				self.importData("6", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection)
+			except:
+				pass
+
+			count = count + 1
+			if (count % 50 == 0):
+				folder_no = folder_no + 50
+
+		count = 8
+		folder_no = 0
+		while (count < 224):
+			try:
+				mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr = self.getFeatures("../ex_samples/oh/ex4_%s-%s/ex_sample4_%s.mp3" % (folder_no, folder_no + 49, str(count).zfill(3)))
+				self.importData("4", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection)
+			except:
+				pass
+
+			count = count + 1
+			if (count % 50 == 0):
+				folder_no = folder_no + 50
+
+		count = 9
+		folder_no = 0
+		while (count < 348):
+			try:
+				mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr = self.getFeatures("../ex_samples/oo/ex5_%s-%s/ex_sample5_%s.mp3" % (folder_no, folder_no + 49, str(count).zfill(3)))
+				self.importData("5", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection)
+			except:
+				pass
+
+			count = count + 1
+			if (count % 50 == 0):
+				folder_no = folder_no + 50
+
+		count = 4
+		folder_no = 0
+		while (count < 287):
+			try:
+				mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr = self.getFeatures("../ex_samples/sh/ex7_%s-%s/ex_sample7_%s.mp3" % (folder_no, folder_no + 49, str(count).zfill(3)))
+				self.importData("7", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection)
+			except:
+				pass
+
+			count = count + 1
+			if (count % 50 == 0):
+				folder_no = folder_no + 50
+
+		count = 5
+		folder_no = 0
+		while (count < 397):
+			try:
+				mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr = self.getFeatures("../ex_samples/ss/ex8_%s-%s/ex_sample8_%s.mp3" % (folder_no, folder_no + 49, str(count).zfill(3)))
+				self.importData("8", mffcs, chroma_stft, spec_cent, spec_bw, rolloff, zcr, db_connection)
+			except:
+				pass
+
 			count = count + 1
 			if (count % 50 == 0):
 				folder_no = folder_no + 50
