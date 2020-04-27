@@ -1,0 +1,11 @@
+Mapping from predicted value to fact that should be shown
+
+Silence (0) -> nn
+ah (1) -> ah
+eh (2) -> eh
+ee (3) -> ee
+oh (4) -> oh
+oo (5) -> oo
+nn (6) -> nn
+sh (7) -> oo
+ss (8) -> ee
