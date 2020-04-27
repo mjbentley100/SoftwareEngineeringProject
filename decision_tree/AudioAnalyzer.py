@@ -26,6 +26,10 @@ while(1):
             rate = sound.frame_rate
             #rate, sig = wav.read('./hmm.wav')
             arr = []
+            
+            file = open("../SEProject_2/check.txt","w")
+            file.write("I'm jamming")
+            file.close()
 
             # perform analysis on audio segment
             mfccs = mfcc(sig,rate,winlen=0.025,winstep=0.01,numcep=13, nfilt=26,nfft=1106,lowfreq=0,highfreq=None,preemph=0.97, ceplifter=22,appendEnergy=True)
@@ -53,7 +57,7 @@ while(1):
             file.close()
         except:
             #print("failed")
-            file = open("../SEProject_2/check.txt","w")
-            file.write("I'm dying :(")
-            file.close()
+            #file = open("../SEProject_2/check.txt","w")
+            #file.write("I'm dying :(")
+            #file.close()
             pass
