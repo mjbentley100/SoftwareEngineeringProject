@@ -18,7 +18,7 @@ while(1):
     if (moddate != init_moddate):
         init_moddate = moddate
         # extract signal and frame rate from audio sample
-        try:     
+        try:
             sound = AudioSegment.from_wav("../SEProject_2/current.wav")
             sig = np.frombuffer(sound.raw_data, dtype=np.int16)
             rate = sound.frame_rate
@@ -34,12 +34,19 @@ while(1):
             zcr = librosa.feature.zero_crossing_rate(y=sig.astype("float32"))
             mfcc_features = mfccs.mean(axis=1)
 
-            count = 0
-            for feat in mfcc_features:
-                if (count < 12):
-                    arr.append(feat)
-                count = count + 1
-
+            arr.append(mfcc_features[0])
+            arr.append(mfcc_features[1])
+            arr.append(mfcc_features[2])
+            arr.append(mfcc_features[3])
+            arr.append(mfcc_features[4])
+            arr.append(mfcc_features[5])
+            arr.append(mfcc_features[6])
+            arr.append(mfcc_features[7])
+            arr.append(mfcc_features[8])
+            arr.append(mfcc_features[9])
+            arr.append(mfcc_features[10])
+            arr.append(mfcc_features[11])
+            arr.append(mfcc_features[12])
             arr.append(np.mean(chroma_stft))
             arr.append(np.mean(spec_cent))
             arr.append(np.mean(spec_bw))
