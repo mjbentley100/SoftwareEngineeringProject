@@ -142,7 +142,7 @@ public class DecisionTree {
 	public double[] parseAudio() {
 		try{
         	// reads file modified by AudioAnalyzer.py 
-            BufferedReader read = new BufferedReader(new FileReader("check.txt"));
+            BufferedReader read = new BufferedReader(new FileReader("C:\\Users\\mjben\\Documents\\GitHub\\SoftwareEngineeringProject\\SEProject_2\\check.txt"));
             // This is an array of features printed into the file check.txt
             String line = read.readLine().trim();
             line = line.replace("[", "");
