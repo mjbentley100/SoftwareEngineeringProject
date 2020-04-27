@@ -14,8 +14,8 @@ public class Tree {
 
 	//Constructor
 	//Takes in the value of the root node
-	public Tree(double val) {
-		this.root = new TreeNode(val, 0, -1);
+	public Tree(double val, int feat) {
+		this.root = new TreeNode(val, feat, 0, -1);
 	}
 	
 	//Methods
@@ -27,22 +27,22 @@ public class Tree {
 	 * @param parent_id The parent of the new node
 	 * @param is_left True if the new node is a left child
 	 */
-	public void addNode(double val, int face, TreeNode base, int parent_id, Boolean is_left) {
+	public void addNode(double val, int feat, int face, TreeNode base, int parent_id, Boolean is_left) {
 		//If current root and parent match, add the node
 		if(base.getID() == parent_id) {
 			if(is_left) {
-				base.left_child = new TreeNode(val, 2 * parent_id + 1, face);
+				base.left_child = new TreeNode(val, feat, 2 * parent_id + 1, face);
 			} else {
-				base.right_child = new TreeNode(val, 2 * parent_id + 2, face);
+				base.right_child = new TreeNode(val, feat, 2 * parent_id + 2, face);
 			}
 			base.is_leaf = false;
 		//Otherwise, go through the tree to try and find a match
 		} else {
 			if(base.left_child != null) {
-				addNode(val, face, base.left_child, parent_id, is_left);
+				addNode(val, feat, face, base.left_child, parent_id, is_left);
 			}
 			if(base.right_child != null ) {
-				addNode(val, face, base.right_child, parent_id, is_left);
+				addNode(val, feat, face, base.right_child, parent_id, is_left);
 			}
 		}
 	}
