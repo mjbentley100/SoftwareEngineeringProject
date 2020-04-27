@@ -61,7 +61,6 @@ public class DecisionTree {
 	public int createTree() {
 		//Read in the text file
 		try {
-
 			BufferedReader reader = new BufferedReader(new FileReader("..\\decision_tree\\trtxt.txt"));
 			String line = reader.readLine();
 			//Add the value of the root node
@@ -86,36 +85,36 @@ public class DecisionTree {
 							line = line.replace("<=", "");
 							//Right child
 							if(this.tree.getNode(i - 1, this.tree.root).left_child != null) {
-								this.tree.addNode(Double.parseDouble(line.trim()), -1, this.tree.root, (i - 1) * 2 + 2, false);
+								this.tree.addNode(Double.parseDouble(line.trim()), -1, this.tree.root, (i - 1), false);
 							//Left child
 							} else {
-								this.tree.addNode(Double.parseDouble(line.trim()), -1, this.tree.root, (i - 1) * 2 + 1, true);
+								this.tree.addNode(Double.parseDouble(line.trim()), -1, this.tree.root, (i - 1), true);
 							}
 							created = true;
 						}
 						//If the depth is full
-						if(!created && i == (int)Math.pow(2, depth) - 1) {
+						if(!created && i == (int)Math.pow(2, depth) - 2) {
 							line = line.replace("<=", "");
 							//Right child
 							if(this.tree.getNode(i, this.tree.root).left_child != null) {
-								this.tree.addNode(Double.parseDouble(line.trim()), -1, this.tree.root, i * 2 + 2, false);
+								this.tree.addNode(Double.parseDouble(line.trim()), -1, this.tree.root, i, false);
 							//Left child
 							} else {
-								this.tree.addNode(Double.parseDouble(line.trim()), -1, this.tree.root, i * 2 + 1, true);
+								this.tree.addNode(Double.parseDouble(line.trim()), -1, this.tree.root, i, true);
 							}
 							created = true;
 						}
 					//Add leaf nodes
-					} else {
+					} else if (!created) {
 						//If the depth isn't full yet
 						if(!created && !this.tree.exists(i, this.tree.root)) {
 							//Add the node
 							//Right child
 							if(this.tree.getNode(i - 1, this.tree.root).left_child != null) {
-								this.tree.addNode(-1, generateFaceVal(line), this.tree.root, (i - 1) * 2 + 2, false);
+								this.tree.addNode(-1, generateFaceVal(line), this.tree.root, (i - 1), false);
 							//Left child
 							} else {
-								this.tree.addNode(-1, generateFaceVal(line), this.tree.root, (i - 1) * 2 + 1, true);
+								this.tree.addNode(-1, generateFaceVal(line), this.tree.root, (i - 1), true);
 							}
 							created = true;
 						}
@@ -123,10 +122,10 @@ public class DecisionTree {
 						if(!created && i == (int)Math.pow(2, depth) - 1) {
 							//Right child
 							if(this.tree.getNode(i, this.tree.root).left_child != null) {
-								this.tree.addNode(-1, generateFaceVal(line), this.tree.root, i * 2 + 2, false);
+								this.tree.addNode(-1, generateFaceVal(line), this.tree.root, i, false);
 							//Left child
 							} else {
-								this.tree.addNode(-1, generateFaceVal(line), this.tree.root, i * 2 + 1, true);
+								this.tree.addNode(-1, generateFaceVal(line), this.tree.root, i, true);
 							}
 							created = true;
 						}
