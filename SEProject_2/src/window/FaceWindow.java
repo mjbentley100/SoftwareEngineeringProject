@@ -135,19 +135,19 @@ public class FaceWindow extends MouseAdapter {
     private void changeFace(int picker){
         //int picker = rand.nextInt(7);
 
-        if (picker == 0) {
+        if (picker == 1) {
             currentFace = this.faces.getFace1();
-        } else if (picker == 1) {
+        } else if (picker == 3 || picker == 8) {
             currentFace = this.faces.getFace2();
         } else if (picker == 2) {
             currentFace = this.faces.getFace3();
-        } else if (picker == 3) {
+        } else if (picker == 6) {
             currentFace = this.faces.getFace4();
         } else if (picker == 4) {
             currentFace = this.faces.getFace5();
-        } else if (picker == 5) {
+        } else if (picker == 5 || picker == 7) {
             currentFace = this.faces.getFace6();
-        } else if (picker == 6) {
+        } else if (picker == 0) {
             currentFace = this.faces.getFace7();
         } else {
             currentFace = this.faces.getFace7();
