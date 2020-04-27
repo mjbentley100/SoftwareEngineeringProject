@@ -20,12 +20,11 @@ while(1):
         init_moddate = moddate
         i = i + 1
         # extract signal and frame rate from audio sample
-        try:
+        try:     
+            sound = AudioSegment.from_wav("../SEProject_2/current.wav")
             file = open("../SEProject_2/check.txt","w")
             file.write("I'm jamming")
             file.close()
-            
-            sound = AudioSegment.from_wav("../SEProject_2/current.wav")
             sig = np.frombuffer(sound.raw_data, dtype=np.int16)
             rate = sound.frame_rate
             #rate, sig = wav.read('./hmm.wav')
