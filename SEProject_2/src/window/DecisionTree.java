@@ -43,7 +43,7 @@ public class DecisionTree {
 	public int createTree() {
 		//Read in the text file
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Logan\\eclipse-workspace\\SoftwareEngineeringProject-master\\SoftwareEngineeringProject-master\\decision_tree\\trtxt.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\mjben\\Documents\\GitHub\\SoftwareEngineeringProject\\decision_tree\\trtxt.txt"));
 			String line = reader.readLine();
 			line = line.replace("|", "");
 			line = line.replace("-", "");
