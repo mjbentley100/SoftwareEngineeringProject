@@ -82,7 +82,7 @@ public class Main extends Canvas implements Runnable{
 
     public void run() {
         long lastTime = System.nanoTime();
-        double amountOfTicks = 60.0;
+        double amountOfTicks = 30.0;
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
         long timer = System.currentTimeMillis();
@@ -118,7 +118,7 @@ public class Main extends Canvas implements Runnable{
 
         if (ProjState == state.MENU) {
 
-        } else if (numtick % 10 == 1){
+        } else if (numtick % 3 == 1){
             se.recordAudio();
             //System.out.println("Main loop " + testCount);
             //testCount++;

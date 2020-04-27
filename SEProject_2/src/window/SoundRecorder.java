@@ -45,7 +45,7 @@ public class SoundRecorder {
                         AudioSystem.write(stream, AudioFileFormat.Type.WAVE, audioFile);
                     }
                     catch(IOException io) {io.printStackTrace();}
-                    //System.out.println("recorder " + count);
+                    System.out.println("recorder " + count);
                     count++;
                 }
             };
