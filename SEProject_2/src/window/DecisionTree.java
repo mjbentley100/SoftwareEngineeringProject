@@ -29,29 +29,11 @@ public class DecisionTree {
 	public int countDepth(String s) {
 		int count = 0;
 		for(int i = 0; i < s.length(); i++) {
-			if(s.charAt(i) =='~') {
+			if(s.charAt(i) =='|') {
 				count++;
 			}
 		}
-		return count;
-	}
-	/**
-	 * Take the array string from a leaf node and generate the corresponding face value
-	 * @param leaf_text The value stored in the leaf node
-	 * @return The number corresponding to the appropriate face
-	 */
-	//TODO
-	//Convert the int values to a single face int
-	public int generateFaceVal(String leaf_text) {
-		int[] values = new int[9];
-		leaf_text = leaf_text.replace("[[", "");
-		leaf_text = leaf_text.replace("]]", "");
-		leaf_text = leaf_text.replace(" ", "");
-		leaf_text = leaf_text.replace(".", "");
-		for(int i = 0; i < 9; i++) {
-			values[i] = leaf_text.charAt(i);
-		}
-		return 0;
+		return count - 1;
 	}
 	
 	/**
@@ -61,19 +43,28 @@ public class DecisionTree {
 	public int createTree() {
 		//Read in the text file
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("..\\decision_tree\\trtxt.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Logan\\eclipse-workspace\\SoftwareEngineeringProject-master\\SoftwareEngineeringProject-master\\decision_tree\\trtxt.txt"));
 			String line = reader.readLine();
-			//Add the value of the root node
+			line = line.replace("|", "");
+			line = line.replace("-", "");
+			line = line.replace("a","");
 			line = line.replace("<=", "");
-			this.tree.root.setValue(Double.parseDouble(line.trim()));
+			line = line.trim();
+			//Add the value of the root node
+			this.tree.root.setValue(Double.parseDouble(line));
 			line = reader.readLine();
 			//Add all the other nodes
 			while(line != null) {
 				//True if the node for this line has been created
 				Boolean created = false;
+				if(line.contains(">")) {
+					created = true;
+				}
 				//Depth of the tree
 				int depth = this.countDepth(line);
-				line = line.replace("~", "");
+				line = line.replace("-", "");
+				line = line.replace("a","");
+				line = line.replace("|", "");
 				//Get the right node id
 				//Find the newest node in depth-1 and add this node as that node's child
 				for(int i = (int)Math.pow(2, depth - 1) - 1; i < (int)Math.pow(2, depth) - 1; i++) {
@@ -83,24 +74,26 @@ public class DecisionTree {
 						if(!created && !this.tree.exists(i, this.tree.root)) {
 							//Add the node
 							line = line.replace("<=", "");
+							line = line.trim();
 							//Right child
 							if(this.tree.getNode(i - 1, this.tree.root).left_child != null) {
-								this.tree.addNode(Double.parseDouble(line.trim()), -1, this.tree.root, (i - 1), false);
+								this.tree.addNode(Double.parseDouble(line), -1, this.tree.root, (i - 1), false);
 							//Left child
 							} else {
-								this.tree.addNode(Double.parseDouble(line.trim()), -1, this.tree.root, (i - 1), true);
+								this.tree.addNode(Double.parseDouble(line), -1, this.tree.root, (i - 1), true);
 							}
 							created = true;
 						}
 						//If the depth is full
 						if(!created && i == (int)Math.pow(2, depth) - 2) {
 							line = line.replace("<=", "");
+							line = line.trim();
 							//Right child
 							if(this.tree.getNode(i, this.tree.root).left_child != null) {
-								this.tree.addNode(Double.parseDouble(line.trim()), -1, this.tree.root, i, false);
+								this.tree.addNode(Double.parseDouble(line), -1, this.tree.root, i, false);
 							//Left child
 							} else {
-								this.tree.addNode(Double.parseDouble(line.trim()), -1, this.tree.root, i, true);
+								this.tree.addNode(Double.parseDouble(line), -1, this.tree.root, i, true);
 							}
 							created = true;
 						}
@@ -110,22 +103,29 @@ public class DecisionTree {
 						if(!created && !this.tree.exists(i, this.tree.root)) {
 							//Add the node
 							//Right child
+							line = line.replace("clss: ", "");
+							line = line.trim();
 							if(this.tree.getNode(i - 1, this.tree.root).left_child != null) {
-								this.tree.addNode(-1, generateFaceVal(line), this.tree.root, (i - 1), false);
+								this.tree.addNode(-1, (int)Double.parseDouble(line), this.tree.root, (i - 1), false);
+								System.out.println((int)Double.parseDouble(line));
 							//Left child
 							} else {
-								this.tree.addNode(-1, generateFaceVal(line), this.tree.root, (i - 1), true);
+								this.tree.addNode(-1, (int)Double.parseDouble(line), this.tree.root, (i - 1), true);
+								System.out.println((int)Double.parseDouble(line));
 							}
 							created = true;
 						}
 						//If the depth is full
 						if(!created && i == (int)Math.pow(2, depth) - 1) {
 							//Right child
+							System.out.println(line);
 							if(this.tree.getNode(i, this.tree.root).left_child != null) {
-								this.tree.addNode(-1, generateFaceVal(line), this.tree.root, i, false);
+								this.tree.addNode(-1, (int)Double.parseDouble(line), this.tree.root, i, false);
+								System.out.println((int)Double.parseDouble(line));
 							//Left child
 							} else {
-								this.tree.addNode(-1, generateFaceVal(line), this.tree.root, i, true);
+								this.tree.addNode(-1, (int)Double.parseDouble(line), this.tree.root, i, true);
+								System.out.println((int)Double.parseDouble(line));
 							}
 							created = true;
 						}
