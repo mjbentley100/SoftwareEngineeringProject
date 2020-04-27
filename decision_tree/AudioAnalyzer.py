@@ -61,4 +61,7 @@ while(1):
             file.close()
         except Exception as inst:
             #print("failed")
+            file = open("..\\SEProject_2\\check.txt","w")
+            file.write("I'm dying :(")
+            file.close()
             pass
