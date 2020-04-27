@@ -9,23 +9,23 @@ from scipy.io import wavfile as wav
 import time
 import os, time
 
-init_moddate = os.stat("../SEProject_2/current.wav")[8]
+init_moddate = os.stat("..\\SEProject_2\\current.wav")[8]
 while(1):
-    file = open("..\SEProject_2\jam.txt","w")
+    file = open("..\\SEProject_2\\jam.txt","w")
     file.write("I'm jamming 8)")
     file.close()
-    moddate = os.stat("../SEProject_2/current.wav")[8]
+    moddate = os.stat("..\\SEProject_2\\current.wav")[8]
     if (moddate != init_moddate):
         init_moddate = moddate
         # extract signal and frame rate from audio sample
         try:
-            sound = AudioSegment.from_wav("..\SEProject_2\current.wav")
+            sound = AudioSegment.from_wav("..\\SEProject_2\\current.wav")
             sig = np.frombuffer(sound.raw_data, dtype=np.int16)
             rate = sound.frame_rate
             #rate, sig = wav.read('./hmm.wav')
             arr = []
             
-            file = open("..\SEProject_2\check.txt","w")
+            file = open("..\\SEProject_2\\check.txt","w")
             file.write("Super Jam != Super Live")
             file.close()
 
@@ -57,7 +57,7 @@ while(1):
             arr.append(np.mean(rolloff))
             arr.append(np.mean(zcr))
             #print("hi")
-            file = open("..\SEProject_2\check.txt","w")
+            file = open("..\\SEProject_2\\check.txt","w")
             file.write(str(arr))
             file.close()
         except Exception as inst:
