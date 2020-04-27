@@ -118,9 +118,9 @@ def main():
 	# Write accurate tree to text file
 	trtxt = open("trtxt.txt", "w")
 	if(gini_accu > entrop_accu):
-		trtxt.write(export_text(clf_gini, feature_names=["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]))
+		trtxt.write(export_text(clf_gini, feature_names=["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]))
 	else:
-		trtxt.write(export_text(clf_entropy, feature_names=["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]))
+		trtxt.write(export_text(clf_entropy, feature_names=["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]))
 	trtxt.close()
 
 
