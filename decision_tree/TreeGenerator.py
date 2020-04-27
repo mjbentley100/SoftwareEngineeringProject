@@ -110,7 +110,6 @@ def print_tree(tree, node, depth):
 		ret_text = ret_text + ("{}<={}\n".format(indent, threshold))
 		ret_text = ret_text + print_tree(tree, tree.children_left[node], depth + 1)
 		#print("{}{}>{}".format(indent, name, threshold))
-		ret_text = ret_text + ("{}>{}\n".format(indent, threshold))
 		ret_text = ret_text + print_tree(tree, tree.children_right[node], depth + 1)
 	# Leaf node
 	else:
