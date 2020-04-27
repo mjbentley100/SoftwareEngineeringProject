@@ -9,11 +9,13 @@ from scipy.io import wavfile as wav
 import time
 import os, time
 
+i = 0
 init_moddate = os.stat("../SEProject_2/current.wav")[8]
 while(1):
     moddate = os.stat("../SEProject_2/current.wav")[8]
     if (moddate != init_moddate):
         init_moddate = moddate
+        i = i + 1
         # extract signal and frame rate from audio sample
         try:
             sound = AudioSegment.from_wav("../SEProject_2/current.wav")
@@ -44,7 +46,7 @@ while(1):
             arr.append(np.mean(zcr))
             #print("hi")
             file = open("../SEProject_2/check.txt","w")
-            file.write(str(arr))
+            file.write(str(arr) + "\n" + str(i))
             file.close()
         except:
             #print("failed")
