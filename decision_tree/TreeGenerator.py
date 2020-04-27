@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn import tree
 from sklearn.tree import export_graphviz
+from sklearn.tree import export_text
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
 
@@ -54,7 +55,7 @@ class TreeGenerator:
 
 		# Perform training
 		clf_gini.fit(X_train, y_train)
-		#tree.export_graphviz(clf_gini, out_file='test.dot') # create graph of decision tree
+		#tree.export_graphviz(clf_gini, out_file='test.dot', class_names=["nn", "ah", "eh", "ee", "oh", "oo", "nn", "oo", "ee"]) # create graph of decision tree
 		return clf_gini
 
 	# Function to perform training using Entropy
@@ -91,31 +92,6 @@ class TreeGenerator:
 
 		return accu
 
-# Function to recursively get tree info for text translation
-def print_tree(tree, node, depth):
-	ret_text = ""
-	# Naming features commented out for now
-	#features = []
-	#for feature in feature_names:
-	#	if(feature != tree.TREE_UNDEFINED):
-	#		features[i] = feature
-	#	else:
-	#		features[i] = "undefined"
-	indent = "~" * (depth - 1)
-	# Not a leaf node
-	if(tree.children_left[node] != tree.children_right[node]):
-		#name = features[node]
-		threshold = tree.threshold[node]
-		#print("{}{}<={}".format(indent, name, threshold))
-		ret_text = ret_text + ("{}<={}\n".format(indent, threshold))
-		ret_text = ret_text + print_tree(tree, tree.children_left[node], depth + 1)
-		#print("{}{}>{}".format(indent, name, threshold))
-		ret_text = ret_text + print_tree(tree, tree.children_right[node], depth + 1)
-	# Leaf node
-	else:
-		ret_text = ret_text + ("{}{}\n".format(indent, tree.value[node]))
-	return ret_text
-
 # Main function
 def main():
 	tree = TreeGenerator("training_data.csv")
@@ -142,9 +118,9 @@ def main():
 	# Write accurate tree to text file
 	trtxt = open("trtxt.txt", "w")
 	if(gini_accu > entrop_accu):
-		trtxt.write(print_tree(clf_gini.tree_, 0, 1))
+		trtxt.write(export_text(clf_gini, feature_names=["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]))
 	else:
-		trtxt.write(print_tree(clf_entropy.tree_, 0, 1))
+		trtxt.write(export_text(clf_entropy, feature_names=["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]))
 	trtxt.close()
 
 
