@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="18d1a444-fa5d-4930-8a4a-99dcc8039c1d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/check.txt" beforeDir="false" afterPath="$PROJECT_DIR$/check.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SEProject_2/window/DecisionTree.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SEProject_2/window/DecisionTree.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SEProject_2/window/Main$state.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SEProject_2/window/Main$state.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SEProject_2/window/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SEProject_2/window/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/window/DecisionTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/window/DecisionTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/window/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/window/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../decision_tree/AudioAnalyzer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../decision_tree/AudioAnalyzer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/current.wav" beforeDir="false" afterPath="$PROJECT_DIR$/current.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jam.txt" beforeDir="false" afterPath="$PROJECT_DIR$/jam.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/window/PythonProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/window/PythonProcess.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,15 +15,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/window/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/window/SoundRecorder.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -42,7 +28,7 @@
         <entry file="file://$PROJECT_DIR$/src/window/DecisionTree.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2652">
-              <caret line="162" column="47" selection-start-line="162" selection-start-column="47" selection-end-line="162" selection-end-column="47" />
+              <caret line="162" column="7" selection-start-line="162" selection-start-column="7" selection-end-line="162" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -50,8 +36,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/window/PythonProcess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+            <state relative-caret-position="357">
+              <caret line="21" column="24" lean-forward="true" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -234,10 +220,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14553991" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14712153" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -246,13 +232,13 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4976526" visible="true" weight="0.20084865" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4976526" weight="0.20084865" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.31661892" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4976526" weight="0.32956153" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49564052" weight="0.32956153" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5023474" side_tool="true" visible="true" weight="0.20084865" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5026652" side_tool="true" visible="true" weight="0.20043337" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49832326" weight="0.32956153" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49899396" weight="0.32956153" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -324,7 +310,7 @@
     <entry file="file://$PROJECT_DIR$/src/window/DecisionTree.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2652">
-          <caret line="162" column="47" selection-start-line="162" selection-start-column="47" selection-end-line="162" selection-end-column="47" />
+          <caret line="162" column="7" selection-start-line="162" selection-start-column="7" selection-end-line="162" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -370,10 +356,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/check.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/window/PythonProcess.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        <state relative-caret-position="357">
+          <caret line="21" column="24" lean-forward="true" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
         </state>
       </provider>
     </entry>
