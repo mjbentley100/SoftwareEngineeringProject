@@ -16,6 +16,7 @@ while(1):
     file.close()
     moddate = os.stat("..\\SEProject_2\\current.wav")[8]
     if (moddate != init_moddate):
+        print("We're starting to jam again\n")
         init_moddate = moddate
         # extract signal and frame rate from audio sample
         try:
