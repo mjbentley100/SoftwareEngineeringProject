@@ -2,6 +2,7 @@ package window;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.io.IOException;
 
 public class Main extends Canvas implements Runnable{
 
@@ -9,6 +10,7 @@ public class Main extends Canvas implements Runnable{
     public static state ProjState = state.MENU;
     private boolean running = false;
     public Handler handler;
+    private PythonProcess pythonProcess = new PythonProcess();;
 
     //sound Handler
     private SoundRecorder se;
@@ -62,6 +64,7 @@ public class Main extends Canvas implements Runnable{
     }
 
     public synchronized void start() {
+        pythonProcess.start();
         thread = new Thread(this);
         thread.start();
         running = true;
@@ -70,6 +73,7 @@ public class Main extends Canvas implements Runnable{
     public synchronized void stop() {
         try {
             thread.join();
+            pythonProcess.stop();
             running = false;
         } catch(Exception e) {
             e.printStackTrace();

@@ -1,9 +1,6 @@
 package window;
 
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.lang.Math;
 import java.util.Scanner;
 
@@ -139,7 +136,7 @@ public class DecisionTree {
 			reader.close();
 			return 0;
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			return -1;
 		}
 	}

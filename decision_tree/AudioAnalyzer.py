@@ -42,10 +42,10 @@ while(1):
             arr.append(np.mean(spec_bw))
             arr.append(np.mean(rolloff))
             arr.append(np.mean(zcr))
-            print(arr)
+            #print("hi")
             file = open("../SEProject_2/check.txt","w")
             file.write(str(arr))
             file.close()
         except:
-            print("failed")
-            continue
+            #print("failed")
+            pass
