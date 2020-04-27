@@ -1,4 +1,4 @@
-Mapping from predicted value to fact that should be shown
+Mapping from predicted value to face that should be shown
 
 Silence (0) -> nn
 ah (1) -> ah
