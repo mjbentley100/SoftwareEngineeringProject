@@ -11,7 +11,7 @@ import os, time
 
 init_moddate = os.stat("../SEProject_2/current.wav")[8]
 while(1):
-    file = open("../SEProject_2/jam.txt","w")
+    file = open("..\SEProject_2\jam.txt","w")
     file.write("I'm jamming 8)")
     file.close()
     moddate = os.stat("../SEProject_2/current.wav")[8]
