@@ -61,7 +61,7 @@ public class DecisionTree {
 	public int createTree() {
 		//Read in the text file
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("../../decision_tree/trtxt.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("..\decision_tree\trtxt.txt"));
 			String line = reader.readLine();
 			//Add the value of the root node
 			line = line.replace("<=", "");
