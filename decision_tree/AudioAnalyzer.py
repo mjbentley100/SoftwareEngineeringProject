@@ -20,14 +20,13 @@ while(1):
         # extract signal and frame rate from audio sample
         try:
             sound = AudioSegment.from_wav("..\\SEProject_2\\current.wav")
+            file = open("..\\SEProject_2\\check.txt","w")
+            file.write("Super Jam != Super Live")
+            file.close()
             sig = np.frombuffer(sound.raw_data, dtype=np.int16)
             rate = sound.frame_rate
             #rate, sig = wav.read('./hmm.wav')
             arr = []
-            
-            file = open("..\\SEProject_2\\check.txt","w")
-            file.write("Super Jam != Super Live")
-            file.close()
 
             # perform analysis on audio segment
             mfccs = mfcc(sig,rate,winlen=0.025,winstep=0.01,numcep=13, nfilt=26,nfft=1106,lowfreq=0,highfreq=None,preemph=0.97, ceplifter=22,appendEnergy=True)
