@@ -25,7 +25,7 @@ while(1):
             #rate, sig = wav.read('./hmm.wav')
             arr = []
             
-            file = open("../SEProject_2/check.txt","w")
+            file = open("..\SEProject_2\check.txt","w")
             file.write("Super Jam != Super Live")
             file.close()
 
@@ -57,7 +57,7 @@ while(1):
             arr.append(np.mean(rolloff))
             arr.append(np.mean(zcr))
             #print("hi")
-            file = open("../SEProject_2/check.txt","w")
+            file = open("..\SEProject_2\check.txt","w")
             file.write(str(arr))
             file.close()
         except Exception as inst:
