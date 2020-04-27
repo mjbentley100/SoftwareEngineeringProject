@@ -43,7 +43,7 @@ public class DecisionTree {
 	public int createTree() {
 		//Read in the text file
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Logan\\eclipse-workspace\\SoftwareEngineeringProject-master\\SoftwareEngineeringProject-master\\decision_tree\\trtxt.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\mjben\\Documents\\GitHub\\SoftwareEngineeringProject\\decision_tree\\trtxt.txt"));
 			String line = reader.readLine();
 			line = line.replace("|", "");
 			line = line.replace("-", "");
@@ -142,7 +142,7 @@ public class DecisionTree {
 	public double[] parseAudio() {
 		try{
         	// reads file modified by AudioAnalyzer.py 
-            BufferedReader read = new BufferedReader(new FileReader("C:\\Users\\Logan\\eclipse-workspace\\SoftwareEngineeringProject-master\\SoftwareEngineeringProject-master\\SEProject_2\\check.txt"));
+            BufferedReader read = new BufferedReader(new FileReader("check.txt"));
             // This is an array of features printed into the file check.txt
             String line = read.readLine().trim();
             line = line.replace("[", "");
