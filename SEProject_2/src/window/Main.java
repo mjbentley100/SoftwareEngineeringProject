@@ -118,7 +118,7 @@ public class Main extends Canvas implements Runnable{
 
         if (ProjState == state.MENU) {
 
-        } else if (numtick % 12 == 1){
+        } else if (numtick % 6 == 1){
             se.recordAudio();
             //System.out.println("Main loop " + testCount);
             //testCount++;
