@@ -43,7 +43,7 @@ public class DecisionTree {
 	public int createTree() {
 		//Read in the text file
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\mjben\\Documents\\GitHub\\SoftwareEngineeringProject\\decision_tree\\trtxt.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Wesley Pick-Roth\\Documents\\GitHub\\SoftwareEngineeringProject\\decision_tree\\trtxt.txt"));
 			String line = reader.readLine();
 			line = line.replace("|", "");
 			line = line.replace("-", "");
@@ -55,77 +55,24 @@ public class DecisionTree {
 			this.tree.root.setFeature(Integer.parseInt(lines[0]));
 			line = reader.readLine();
 			//Add all the other nodes
+			TreeNode parent = null;
 			while(line != null) {
-				//True if the node for this line has been created
-				Boolean created = false;
-				if(line.contains(">")) {
-					created = true;
-				}
-				//Depth of the tree
-				int depth = this.countDepth(line);
 				line = line.replace("-", "");
 				line = line.replace("|", "");
-				//Get the right node id
-				//Find the newest node in depth-1 and add this node as that node's child
-				for(int i = (int)Math.pow(2, depth - 1) - 1; i < (int)Math.pow(2, depth) - 1; i++) {
-					//Add testing nodes
-					if(line.contains("<=")) {
-						//If the depth isn't full yet
-						if(!created && !this.tree.exists(i, this.tree.root)) {
-							//Add the node
-							line = line.replace("<=", "");
-							line = line.trim();
-							lines = line.split(" ");
-							//Right child
-							if(this.tree.getNode(i - 1, this.tree.root).left_child != null) {
-								this.tree.addNode(Double.parseDouble(lines[2]), Integer.parseInt(lines[0]), -1, this.tree.root, (i - 1), false);
-							//Left child
-							} else {
-								this.tree.addNode(Double.parseDouble(lines[2]), Integer.parseInt(lines[0]), -1, this.tree.root, (i - 1), true);
-							}
-							created = true;
-						}
-						//If the depth is full
-						if(!created && i == (int)Math.pow(2, depth) - 2) {
-							line = line.replace("<=", "");
-							line = line.trim();
-							//Right child
-							if(this.tree.getNode(i, this.tree.root).left_child != null) {
-								this.tree.addNode(Double.parseDouble(lines[2]), Integer.parseInt(lines[0]), -1, this.tree.root, i, false);
-							//Left child
-							} else {
-								this.tree.addNode(Double.parseDouble(lines[2]), Integer.parseInt(lines[0]), -1, this.tree.root, i, true);
-							}
-							created = true;
-						}
-					//Add leaf nodes
-					} else if (!created) {
-						//If the depth isn't full yet
-						if(!created && !this.tree.exists(i, this.tree.root)) {
-							//Add the node
-							//Right child
-							line = line.replace("class: ", "");
-							line = line.trim();
-							if(this.tree.getNode(i - 1, this.tree.root).left_child != null) {
-								this.tree.addNode(-1, -1, (int)Double.parseDouble(line), this.tree.root, (i - 1), false);
-							//Left child
-							} else {
-								this.tree.addNode(-1, -1, (int)Double.parseDouble(line), this.tree.root, (i - 1), true);
-							}
-							created = true;
-						}
-						//If the depth is full
-						if(!created && i == (int)Math.pow(2, depth) - 1) {
-							//Right child
-							if(this.tree.getNode(i, this.tree.root).left_child != null) {
-								this.tree.addNode(-1, -1, (int)Double.parseDouble(line), this.tree.root, i, false);
-							//Left child
-							} else {
-								this.tree.addNode(-1, -1, (int)Double.parseDouble(line), this.tree.root, i, true);
-							}
-							created = true;
-						}
-					}
+				//Create new node
+				if(line.contains("<=")) {
+					line = line.replace("<=", "");
+					line = line.trim();
+					lines = line.split(" ");
+					this.tree.addNode(Double.parseDouble(lines[2]), Integer.parseInt(lines[0]), -1);
+				//Move up the tree
+				} else if (line.contains(">")) {
+					this.tree.moveUp();
+				//Create leaf
+				} else {
+					line = line.replace("class: ", "");
+					line = line.trim();
+					this.tree.addNode(-1, -1, (int)Double.parseDouble(line));
 				}
 				line = reader.readLine();
 			}
@@ -142,7 +89,7 @@ public class DecisionTree {
 	public double[] parseAudio() {
 		try{
         	// reads file modified by AudioAnalyzer.py 
-            BufferedReader read = new BufferedReader(new FileReader("C:\\Users\\mjben\\Documents\\GitHub\\SoftwareEngineeringProject\\SEProject_2\\check.txt"));
+            BufferedReader read = new BufferedReader(new FileReader("C:\\Users\\Wesley Pick-Roth\\Documents\\GitHub\\SoftwareEngineeringProject\\SEProject_2\\check.txt"));
             // This is an array of features printed into the file check.txt
             String line = read.readLine().trim();
             line = line.replace("[", "");
@@ -162,12 +109,12 @@ public class DecisionTree {
 	
 	/**
 	 * Find the appropriate face for some audio value
-	 * @param value The value from some processed audio
+	 * @param values The value from some processed audio
 	 * @param base The current root
 	 * @return The number of the face to make
 	 */
 	public int getFace(double[] values, TreeNode base) {
-		if(base.is_leaf) {
+		if(base.right_child == null) {
 			return base.face_value;
 		} else {
 			int feature = base.getFeature();

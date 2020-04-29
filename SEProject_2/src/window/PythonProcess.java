@@ -11,7 +11,7 @@ public class PythonProcess {
     public void start () {
         System.out.println("RUNNING!");
         try {
-            p = Runtime.getRuntime().exec("python C:\\Users\\mjben\\Documents\\GitHub\\SoftwareEngineeringProject\\decision_tree\\AudioAnalyzer.py");
+            p = Runtime.getRuntime().exec("python ..\\decision_tree\\AudioAnalyzer.py");
         } catch (IOException e) {
             e.printStackTrace();
         }

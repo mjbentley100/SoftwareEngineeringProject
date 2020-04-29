@@ -50,7 +50,7 @@ public class SoundRecorder {
                 }
             };
             thread.start();
-            thread.sleep(200);
+            thread.sleep(150);
             dataLine.stop();
             dataLine.close();
 
